@@ -11,6 +11,7 @@
 				margin: 0px;
 				padding: 0px; 
 			}
+			
 			#map {
 				position: absolute;
 				align: center;
@@ -18,9 +19,10 @@
 				bottom: 50px;
 				width: 100%;
 			}
-			h2 {
-				margin: 30px;
-			}
+			
+			.mapboxgl-popup {
+				max-width: 400px;
+				font: 12px/20px 'Courier New';
 		</style>
 		</head>
 <body>
@@ -40,66 +42,27 @@
     	});
 
 	map.on('load', () => {
-		// Add a data source containing GeoJSON data.
-		map.addSource('chinatown', {
-			'type': 'geojson',
+		map.addSource('places', {
+			// This GeoJSON contains features that include an "icon"
+			// property. The value of the "icon" property corresponds
+			// to an image in the Mapbox Streets style's sprite.
+				'type': 'geojson',
 				'data': {
-					'type': 'Feature',
-						'geometry': {
-							'type': 'Polygon',
-							// These coordinates outline Maine.
-							'coordinates': [
-								[
-									[-74.00191885978435, 40.719358377657656],
-									[-73.99862202976641, 40.717088334181796],
-									[-73.99777882206922, 40.71681113331297],
-									[-73.99648861270124, 40.71899020901554],
-									[-73.99483267470053, 40.71842812211689],
-									[-73.99545238156232, 40.71724233417299],
-									[-73.98972827940949, 40.71564264182627],
-									[-73.99023867628144, 40.714495246375535],
-									[-73.9901117893832, 40.713390867090176],
-									[-73.99711117941503, 40.71280708155308],
-									[-73.99746558764714, 40.713977799588534],
-									[-73.99866882546948, 40.71349359576222],
-									[-74.00048194972695, 40.71437745574997],
-									[-74.00055195629132, 40.71515018006659],
-									[-74.00405482317291, 40.716846918823734],
-									[-74.00191885978435, 40.719358377657656],
-								]
-							]
-						}
+				'type': 'FeatureCollection',
+				'features': [
+					{
+						'type': 'Feature',
+						'properties': {
+						'description':
+						'<strong>Make it Mount Pleasant</strong><p><a href="http://www.mtpleasantdc.com/makeitmtpleasant" target="_blank" title="Opens in a new window">Make it Mount Pleasant</a> is a handmade and vintage market and afternoon of live entertainment and kids activities. 12:00-6:00 p.m.</p>',
+						'icon': 'theatre'
+					},
+					'geometry': {
+						'type': 'Point',
+						'coordinates': [-73.99818456566831, 40.71567310430907]
 					}
-				});
-			
-		// Add a new layer to visualize the polygon.
-		map.addLayer({
-			'id': 'chinatown',
-			'type': 'fill',
-			'source': 'chinatown', // reference the data source
-			'layout': {},
-			'paint': {
-				'fill-color': '#D3A84C', // blue color fill
-				'fill-opacity': 0.25
-			}
-		});
-			
-		// Add a black outline around the polygon.
-		map.addLayer({
-			'id': 'outline',
-			'type': 'line',
-			'source': 'chinatown',
-			'layout': {},
-			'paint': {
-				'line-color': '#D3A84C',
-				'line-width': 2
-				}
-			});
-		});
+			},
 		
-		const marker2 = new mapboxgl.Marker({ color: '#A60A17' })
-			.setLngLat([-73.9994720260165, 40.715640576362176])
-			.addTo(map);
 	</script>
 
 </body>
