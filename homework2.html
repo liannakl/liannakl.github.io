@@ -11,7 +11,7 @@
 				margin: 30px;
 				padding: 0; 
 					 }
-			#map { position: absolute; top: 0; bottom: 0; width: 100%; }
+			#map { position: absolute; top: 0; bottom: 0; width: 50%; }
 		</style>
 		</head>
 <body>
@@ -22,9 +22,67 @@
      	   container: 'map', // container ID
      	   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
      	   style: 'mapbox://styles/mapbox/streets-v12', // style URL
-      	 center: [-74.5, 40], // starting position [lng, lat]
+      	 center: [40.7158, 73.9970], // starting position [lng, lat]
      	   zoom: 9 // starting zoom
     	});
+
+		map.on('load', () => {
+		// Add a data source containing GeoJSON data.
+		map.addSource('chinatown', {
+			'type': 'geojson',
+				'data': {
+					'type': 'Feature',
+						'geometry': {
+							'type': 'Polygon',
+							// These coordinates outline Maine.
+							'coordinates': [
+								[
+									[40.719356892385285, -74.00191616867401],
+									[40.71706869922146, -73.99860427450777],
+									[40.71680183995348, -73.99775340427288],
+									[40.71900260432293, -73.99649130678102],
+									[40.71842446859721, -73.9948263682285],
+									[40.717251504737035, -73.99544980337198],
+									[40.71565045907125, -73.98971420006222],
+									[40.71441629341942, -73.9902202827068],
+									[40.713376685702706, -73.99011026474032],
+									[40.7128040606013, -73.99712207645666],
+									[40.71280962009249, -73.99713674551803],
+									[40.71396598403468, -73.99745213035533],
+									[40.71349899332178, -73.9986623279846],
+									[40.71435514047966, -74.00047395716108],
+									[40.715139005802456, -74.00053263340986],
+									[40.71684012860355, -74.0040532083325],
+								]
+							]
+						}
+					}
+				});
+			
+			// Add a new layer to visualize the polygon.
+			map.addLayer({
+				'id': 'chinatown',
+				'type': 'fill',
+				'source': 'maine', // reference the data source
+				'layout': {},
+				'paint': {
+					'fill-color': '#0080ff', // blue color fill
+					'fill-opacity': 0.5
+				}
+			});
+			
+			// Add a black outline around the polygon.
+			map.addLayer({
+				'id': 'outline',
+				'type': 'line',
+				'source': 'chinatown',
+				'layout': {},
+				'paint': {
+					'line-color': '#000',
+					'line-width': 3
+					}
+				});
+			});
 	</script>
 
 </body>
