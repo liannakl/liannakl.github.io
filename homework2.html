@@ -36,7 +36,7 @@
      	   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
      	   style: 'mapbox://styles/mapbox/streets-v12', // style URL
       	 center: [-73.9970, 40.7158], // starting position [lng, lat]
-     	   zoom: 15 // starting zoom
+     	   zoom: 17 // starting zoom
     	});
 
 	map.on('load', () => {
@@ -72,30 +72,34 @@
 					}
 				});
 			
-			// Add a new layer to visualize the polygon.
-			map.addLayer({
-				'id': 'chinatown',
-				'type': 'fill',
-				'source': 'chinatown', // reference the data source
-				'layout': {},
-				'paint': {
-					'fill-color': '#A60A17', // blue color fill
-					'fill-opacity': 0.25
+		// Add a new layer to visualize the polygon.
+		map.addLayer({
+			'id': 'chinatown',
+			'type': 'fill',
+			'source': 'chinatown', // reference the data source
+			'layout': {},
+			'paint': {
+				'fill-color': '#A60A17', // blue color fill
+				'fill-opacity': 0.25
+			}
+		});
+			
+		// Add a black outline around the polygon.
+		map.addLayer({
+			'id': 'outline',
+			'type': 'line',
+			'source': 'chinatown',
+			'layout': {},
+			'paint': {
+				'line-color': '#A60A17',
+				'line-width': 2
 				}
 			});
-			
-			// Add a black outline around the polygon.
-			map.addLayer({
-				'id': 'outline',
-				'type': 'line',
-				'source': 'chinatown',
-				'layout': {},
-				'paint': {
-					'line-color': '#A60A17',
-					'line-width': 2
-					}
-				});
-			});
+		});
+		
+		const marker2 = new mapboxgl.Marker({ color: '#FFD87C' })
+			.setLngLat([-73.9994720260165, 40.715640576362176])
+			.addTo(map);
 	</script>
 
 </body>
