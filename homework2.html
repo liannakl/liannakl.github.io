@@ -39,26 +39,25 @@
     	});
 
 	map.on('load', () => {
-map.addSource('places', {
-// This GeoJSON contains features that include an "icon"
-// property. The value of the "icon" property corresponds
-// to an image in the Mapbox Streets style's sprite.
-'type': 'geojson',
-'data': {
-'type': 'FeatureCollection',
-'features': [
-{
-'type': 'Feature',
-'properties': {
-'description':
-'<strong>Yu &amp; Me Books</strong><p>Opened in December 2021 by Lucy Yu, <a https://www.yuandmebooks.com/" target="_blank" title="Opens in a new window">Yu &amp; Me Books</a> is the first Asian American woman-owned bookstore in Chinatown. The bookstore is also a bar and cafe, and its small size creates cozy vibes. The books sold here focus on Asian American voices and immigrant stories.</p>',
-'icon': 'mapbox-marker-icon-red'
-},
-'geometry': {
-'type': 'Point',
-'coordinates': [-73.99957927301651, 40.71521410323306]
-}
-},
+		map.addSource('places', {
+		// This GeoJSON contains features that include an "icon" property. The value of the "icon" property corresponds to an image in the Mapbox Streets style's sprite.
+		'type': 'geojson',
+		'data': {
+			'type': 'FeatureCollection',
+			'features': [
+				{
+					'type': 'Feature',
+					'properties': {
+						'description':
+							'<strong>Yu &amp; Me Books</strong><p>Opened in December 2021 by Lucy Yu, <a hrefhttps://www.yuandmebooks.com/" target="_blank" title="Opens in a new window">Yu &amp; Me Books</a> is the first Asian American woman-owned bookstore in Chinatown. The bookstore is also a bar and cafe, and its small size creates cozy vibes. The books sold here focus on Asian American voices and immigrant stories.</p>',
+						'icon': 'mapbox-marker-icon-red'
+					},
+					'geometry': {
+						'type': 'Point',
+						'coordinates': [-73.99957927301651, 40.71521410323306]
+					}
+				},
+				
 {
 'type': 'Feature',
 'properties': {
