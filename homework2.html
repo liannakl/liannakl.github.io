@@ -126,47 +126,102 @@
 		}
 	});
 
-// Add a layer showing the places.
-map.addLayer({
-'id': 'places',
-'type': 'symbol',
-'source': 'places',
-'layout': {
-'icon-image': ['get', 'icon'],
-'icon-allow-overlap': true
-}
-});
+	// Add a layer showing the places.
+	map.addLayer({
+		'id': 'places',
+		'type': 'symbol',
+		'source': 'places',
+		'layout': {
+			'icon-image': ['get', 'icon'],
+			'icon-allow-overlap': true
+		}
+	});
  
-// When a click event occurs on a feature in the places layer, open a popup at the
-// location of the feature, with description HTML from its properties.
-map.on('click', 'places', (e) => {
-// Copy coordinates array.
-const coordinates = e.features[0].geometry.coordinates.slice();
-const description = e.features[0].properties.description;
+	// When a click event occurs on a feature in the places layer, open a popup at the location of the feature, with description HTML from its properties.
+	map.on('click', 'places', (e) => {
+		// Copy coordinates array.
+		const coordinates = e.features[0].geometry.coordinates.slice();
+		const description = e.features[0].properties.description;
  
-// Ensure that if the map is zoomed out such that multiple
-// copies of the feature are visible, the popup appears
-// over the copy being pointed to.
-while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
-coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
-}
+	// Ensure that if the map is zoomed out such that multiple copies of the feature are visible, the popup appears over the copy being pointed to.
+	while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+		coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+	}
  
-new mapboxgl.Popup()
-.setLngLat(coordinates)
-.setHTML(description)
-.addTo(map);
-});
+	new mapboxgl.Popup()
+		.setLngLat(coordinates)
+		.setHTML(description)
+		.addTo(map);
+	});
  
-// Change the cursor to a pointer when the mouse is over the places layer.
-map.on('mouseenter', 'places', () => {
-map.getCanvas().style.cursor = 'pointer';
-});
+	// Change the cursor to a pointer when the mouse is over the places layer.
+	map.on('mouseenter', 'places', () => {
+		map.getCanvas().style.cursor = 'pointer';
+	});
  
-// Change it back to a pointer when it leaves.
-map.on('mouseleave', 'places', () => {
-map.getCanvas().style.cursor = '';
+	// Change it back to a pointer when it leaves.
+	map.on('mouseleave', 'places', () => {
+		map.getCanvas().style.cursor = '';
+	});
 });
-});
+
+map.on('load', () => {
+	// Add a data source containing GeoJSON data.
+	map.addSource('chinatown', {
+		'type': 'geojson',
+		'data': {
+			'type': 'Feature',
+			'geometry': {
+				'type': 'Polygon',
+				// These coordinates outline Maine.
+				'coordinates': [
+					[
+						[-74.00191521953647, 40.71935479546599],
+						[-73.99862531968724, 40.71709174856674],
+						[-73.99777206505622, 40.716817198920715],
+						[-73.99649265909625, 40.718997073501846],
+						[-73.99482477926932, 40.7184293892483],
+						[-73.99543479087579, 40.71724718587853],
+						[-73.98972075812631, 40.71565527487346],
+						[-73.99023810973999, 40.71452569727762],
+						[-73.99010684141982, 40.713378541892126],
+						[-73.99710267070441, 40.71280495678245],
+						[-73.99746558900137, 40.713975533380854],
+						[-73.99865472554647, 40.71350730521113],
+						[-74.00049248202369, 40.71436181915703],
+						[-74.00054653368493, 40.71515779487028],
+						[-74.00405216999454, 40.716837506522516],
+						[-74.00191521953647, 40.71935479546599]
+					]
+				]
+			}
+		}
+	});
+ 
+	// Add a new layer to visualize the polygon.
+	map.addLayer({
+		'id': 'chinatown',
+		'type': 'fill',
+		'source': 'chinatown', // reference the data source
+		'layout': {},
+			'paint': {
+			'fill-color': '#D3A84C', // blue color fill
+			'fill-opacity': 0.25
+		}
+	});
+
+	// Add a black outline around the polygon.
+	map.addLayer({
+		'id': 'outline',
+		'type': 'line',
+		'source': 'chinatown',
+		'layout': {},
+		'paint': {
+			'line-color': '#D3A84C',
+			'line-width': 3
+			}
+		});
+	});
 
 		
 	</script>
