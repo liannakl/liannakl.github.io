@@ -10,12 +10,14 @@
 			body {
 				margin: 0px;
 				padding: 0px; 
+				background-color: #A60A17;
+				color: #FFD87C;
 			}
 			
 			#map {
 				position: absolute;
-				top: 100px;
-				bottom: 50px;
+				top: 300px;
+				bottom: 25px;
 				width: 100%;
 			}
 	
@@ -23,14 +25,12 @@
 		</head>
 <body>
 	<h1 style="margin-left: 30px">Homework 2: Mapbox</h1>
+
+	<h2 style="color: #FFD87C; margin-left: 30px; font-size: 40px;">Welcome to Chinatown.</h2>
+	<p style="margin: 30px; font-size: 18px;">In this map, you'll find fifteen of my must visit spots in Chinatown. Growing up in Chinatown, it's hard to see the gentrification progress. Most of the residents that lived in the neighborhood when I did have since moved out to Brooklyn's Chinatown, or Flushing, but Manhattan's Chinatown will always have a special place in my heart. I stop by at least two of the shops and small businesses when I'm in the area, so without further ado, I present to you my favorite places in Chinatown.</p>
+
+	<p style="margin: 30px; font-size: 18px;">Red Pins: Places to Shop | Blue Pins: Places to Eat</p>
 	
-	<br>
-
-	<h3 style="color: #A60A17;">Welcome to Chinatown.</h3>
-	<p>In this map, you'll find fifteen of my must visit spots in Chinatown. Growing up in Chinatown, it's hard to see the gentrification progress. Most of the residents that lived in the neighborhood when I did have sinced moved out to Brooklyn's Chinatown, or Flushing, but Manhattan's Chinatown will always have a special place in my heart. I stop by at leas two of the shops and small businesses when I'm in the area, so without further ado, I present to you my favorite places in Chinatown.</p>
-
-	<p>Red Pins: Places to Shop</p>
-	<p>Blue Pins: Places to Eat</p>
 
 	<br>
 	
@@ -41,8 +41,8 @@
      	   container: 'map', // container ID
      	   // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
      	   style: 'mapbox://styles/liannakl/clmbm0n1l034301ma0ehp87tx', // style URL
-      	 center: [-73.9970, 40.7158], // starting position [lng, lat]
-     	   zoom: 15.5 // starting zoom
+      	 center: [-73.9970, 40.7162], // starting position [lng, lat]
+     	   zoom: 15.3 // starting zoom
     	});
 
 	map.on('load', () => {
