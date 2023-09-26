@@ -18,14 +18,16 @@
             }
         </style> 
         <script>
-            var vid, playbtn;
+            var vid, playbtn, seekslider;
 
             function initializePlayer () {
                 // set object references
                 vid = document.getElementById("video");
                 playbtn = document.getElementById("playpausebtn");
+                seekslider = document.getElementById("seekslider");
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
+                seekslider.addEventListener("change",vidSeek,false);
             }
             window.onload = initializePlayer;
 
@@ -38,6 +40,10 @@
                     playbtn.innerHTML = "Play";
                 }
             }
+            function vidSeek() {
+                var seekto = vid.duration * (seekslider.value / 100);
+                vid.currentTime = seekto;
+            }
         </script>
     </head>
     <body>
@@ -49,6 +55,7 @@
 
             <div id="video_controls_bar">
                 <button id="playpausebtn">Pause</button>
+                <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
             </div>
         </div>
     </body>
