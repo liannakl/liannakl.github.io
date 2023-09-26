@@ -24,7 +24,7 @@
             }
         </style> 
         <script>
-            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider;
+            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn;
 
             function initializePlayer () {
                 // set object references
@@ -33,14 +33,17 @@
                 seekslider = document.getElementById("seekslider");
                 curtimetext = document.getElementById("curtimetext");
                 durtimetext = document.getElementById("durtimetext");
-                mutebtn = document.getElementById("mutebtn")
-                volumeslider = document.getElementById("volumeslider")
+                mutebtn = document.getElementById("mutebtn");
+                volumeslider = document.getElementById("volumeslider");
+                fullscreenbtn = document.getElementById("fullscreenbtn")
+
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
                 seekslider.addEventListener("change",vidSeek,false);
                 vid.addEventListener("timeupdate",seektimeupdate,false);
                 mutebtn.addEventListener ("click",vidmute,false);
                 volumeslider.addEventListener("change",setvolume,false);
+                fullscreenbtn.addEventListener ("click",toggleFullScreen,false);
             }
             window.onload = initializePlayer;
 
@@ -85,6 +88,15 @@
             function setvolume () {
                 vid.volume = volumeslider.value / 100;
             }
+            function toggleFullScreen () {
+                if(vid.requestFullScreen) {
+                    vid.requestFullScreen ();
+                } else if(vid.webkitRequestFullScreen) {
+                    vid.webkitRequestFullScreen ();
+                } else if (vid.mozRequestFullScreen) {
+                    vid.mozRequestFullScreen ();
+                }
+            }
         </script>
     </head>
     <body>
@@ -101,6 +113,7 @@
                 <span id="durtimetext">0:00</span>
                 <button id="mutebtn">Mute</button>
                 <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                <button id="fullscreenbtn">[ &nbsp; ]</button>
             </div>
         </div>
     </body>
