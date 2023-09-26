@@ -15,15 +15,19 @@
                 <track label="English" kind="subtitles" srclang="en" src="hw4.vtt">
             </video>
 
-            <div id="video-controls">
-                <button type="button" id="play-pause" class="play">Play</button>
-                <button type="button" id="reverse" class="reverse">&#60;&#60;</button>
-                <input type="range" id="seek-bar" value="0">
-                <button type="button" id="ff" class="fast_forward">>></button>
-			    <button type="button" id="mute">Mute</button>
-			    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
-                <button type="button" id="cc" class="closed_captioning">CC</button>
-			    <button type="button" id="full-screen">Full-Screen</button>
+            <div id="video-controls" class="controls" data-state="hidden">
+                <button id="playpause" type="button" data-state="play">Play/Pause</button>
+                <button id="stop" type="button" data-state="stop">Stop</button>
+                <div class="progress">
+                    <progress id="progress" value="0" min="0">
+                        <span id="progress-bar"></span>
+                    </progress>
+                </div>
+                <button id="mute" type="button" data-state="mute">Mute/Unmute</button>
+                <button id="volinc" type="button" data-state="volup">Vol+</button>
+                <button id="voldec" type="button" data-state="voldown">Vol-</button>
+                <button id="fs" type="button" data-state="go-fullscreen">Fullscreen</button>
+                <button id="subtitles" type="button" data-state="subtitles">CC</button>
             </div>
         </div>
         <script src="hw4.js"></script>
