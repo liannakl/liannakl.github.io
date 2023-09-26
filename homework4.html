@@ -28,6 +28,7 @@
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
                 seekslider.addEventListener("change",vidSeek,false);
+                vid.addEventListener("timeupdate",seektimeupdate,false);
             }
             window.onload = initializePlayer;
 
@@ -43,6 +44,10 @@
             function vidSeek() {
                 var seekto = vid.duration * (seekslider.value / 100);
                 vid.currentTime = seekto;
+            }
+            function seektimeupdate () {
+                var nt = vid.currentTime * (100/ vid.duration);
+                seekslider.value = nt;
             }
         </script>
     </head>
