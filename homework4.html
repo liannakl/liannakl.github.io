@@ -22,6 +22,19 @@
             input#volumeslider{
                 width:100px;
             }
+            input [type='range'] {
+                -webkit-appearance: none !important;
+                background: #666;
+                height: 4px;
+            }
+            input [type='range']::-webkit-skider-thumb {
+                -webkit-appearance: none !important;
+                background: #fff;
+                height: 15px;
+                width: 15px;
+                border-radius: 100%
+                cursor: pointer;
+            }
         </style> 
         <script>
             var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn;
