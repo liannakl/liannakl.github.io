@@ -16,9 +16,15 @@
                 background:#333;
                 padding: 10px;
             }
+            input#seekslider{
+                width: 250px;
+            }
+            input#volumeslider{
+                width:100px;
+            }
         </style> 
         <script>
-            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn;
+            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider;
 
             function initializePlayer () {
                 // set object references
@@ -28,11 +34,13 @@
                 curtimetext = document.getElementById("curtimetext");
                 durtimetext = document.getElementById("durtimetext");
                 mutebtn = document.getElementById("mutebtn")
+                volumeslider = document.getElementById("volumeslider")
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
                 seekslider.addEventListener("change",vidSeek,false);
                 vid.addEventListener("timeupdate",seektimeupdate,false);
-                mutebtn.addEventListener ("click",vidmute,false)
+                mutebtn.addEventListener ("click",vidmute,false);
+                volumeslider.addEventListener("change",setvolume,false);
             }
             window.onload = initializePlayer;
 
@@ -74,6 +82,9 @@
                     mutebtn.innerHTML = "Unmute";
                 }
             }
+            function setvolume () {
+                vid.volume = volumeslider.value / 100;
+            }
         </script>
     </head>
     <body>
@@ -89,6 +100,7 @@
                 <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
                 <span id="durtimetext">0:00</span>
                 <button id="mutebtn">Mute</button>
+                <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
             </div>
         </div>
     </body>
