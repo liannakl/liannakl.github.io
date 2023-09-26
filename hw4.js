@@ -159,6 +159,13 @@ window.onload = function() { // sets initial behavior on page loading
 		video.play();
 	});
 
+
+	// subtitles
+	const subtitles = document.getElementById("subtitles");
+	for (let i = 0; i < video.textTracks.length; i++) {
+		video.textTracks[i].mode = "hidden";
+	  }
+
 }
 
 
