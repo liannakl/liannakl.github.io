@@ -6,35 +6,49 @@
 			<title>Homework 4</title>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <style>
+            div#video_player_box{
+                width: 960px;
+                height: 720px;
+                background: black;
+                margin: 0px auto;
+            }
             div#video_controls_bar{
                 background:#333;
                 padding: 10px;
             }
         </style> 
         <script>
-            function playPause(btn,vid) {
-                var vid = document.getElementById(vid)
+            var vid, playbtn;
+
+            function initializePlayer () {
+                vid = document.getElementById("video");
+                playbtn = document.getElementById("playpausebtn");
+                
+            }
+            window.onload = initializePlayer;
+
+            function playPause() {
                 if(vid.paused) {
                     vid.play();
-                    btn.innerHTML = "Pause";
+                    playbtn.innerHTML = "Pause";
                 } else {
                     vid.pause();
-                    btn.innerHTML = "Play";
+                    playbtn.innerHTML = "Play";
                 }
             }
         </script>
     </head>
     <body>
         <h1>Homework 4: Custom Media Players</h1>
-        <div id="video-container">
+        <div id="video_player_box">
             <video id="video" width="960" height="720" autoplay>
                 <source src="https://dl.dropboxusercontent.com/s/e9n9dbxfg2e9tfn/ThePerfectEgg.mp4?dl=0" type=video/mp4>
             </video>
 
-        <div id="video_controls_bar">
-            <button id="playpausebtn" onclick="playPause(this,'video')">Pause</button>
+            <div id="video_controls_bar">
+                <button id="playpausebtn" onclick="playPause()">Pause</button>
+            </div>
         </div>
-        
     </body>
 
 </html>
