@@ -181,23 +181,6 @@
 				subtitleMenuButtons.push(button);
 				return listItem;
 			}
-			// Go through each one and build a small clickable list, and when each item is clicked on, set its mode to be "showing" and the others to be "hidden"
-			var subtitlesMenu;
-			if (video.textTracks) {
-				var df = document.createDocumentFragment();
-				var subtitlesMenu = df.appendChild(document.createElement('ul'));
-				subtitlesMenu.className = 'subtitles-menu';
-				subtitlesMenu.appendChild(createMenuItem('subtitles-off', '', 'Off'));
-				for (var i = 0; i < video.textTracks.length; i++) {
-					subtitlesMenu.appendChild(createMenuItem('subtitles-' + video.textTracks[i].language, video.textTracks[i].language, video.textTracks[i].label));
-				}
-				videoContainer.appendChild(subtitlesMenu);
-			}
-			subtitles.addEventListener('click', function(e) {
-				if (subtitlesMenu) {
-					subtitlesMenu.style.display = (subtitlesMenu.style.display == 'block' ? 'none' : 'block');
-				}
-			});
 
 			// The Media API has no 'stop()' function, so pause the video and reset its time and the progress bar
 			stop.addEventListener('click', function(e) {
