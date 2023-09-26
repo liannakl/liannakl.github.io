@@ -18,7 +18,7 @@
             }
         </style> 
         <script>
-            var vid, playbtn, seekslider, curtimetext, durtimetext mutebtn;
+            var vid, playbtn, seekslider, curtimetext, durtimetext;
 
             function initializePlayer () {
                 // set object references
@@ -27,12 +27,10 @@
                 seekslider = document.getElementById("seekslider");
                 curtimetext = document.getElementById("curtimetext");
                 durtimetext = document.getElementById("durtimetext");
-                mutebtn = document.getElementById("mutebtn");
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
                 seekslider.addEventListener("change",vidSeek,false);
                 vid.addEventListener("timeupdate",seektimeupdate,false);
-                mutebtn.addEventListener("click",vidmute,false);
             }
             window.onload = initializePlayer;
 
@@ -64,8 +62,6 @@
                 }
                 curtimetext.innerHTML = curmins+":"+cursecs;
                 durtimetext.innerHTML = durmins+":"+dursecs;
-
-                
             }
         </script>
     </head>
@@ -81,7 +77,6 @@
                 <span id="curtimetext">0:00</span> 
                 <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
                 <span id="durtimetext">0:00</span>
-                <button id="mutebtn">Mute</button>
             </div>
         </div>
     </body>
