@@ -17,6 +17,9 @@
                 padding: 10px;
                 font-family:'Courier New', Courier, monospace;
             }
+            button#playpausebtn {
+                cursor:pointer;
+            }
             input#seekslider{
                 width: 300px;
             }
@@ -65,10 +68,10 @@
             function playPause() {
                 if(vid.paused) {
                     vid.play();
-                    playbtn.innerHTML = "Pause";
+                    playbtn.style.background = "url(homework4/pause.png)";
                 } else {
                     vid.pause();
-                    playbtn.innerHTML = "Play";
+                    playbtn.style.background = "url(homework4/play.png)";
                 }
             }
             function vidSeek() {
@@ -119,7 +122,6 @@
         <div id="video_player_box">
             <video id="video" width="960" height="720">
                 <source src="https://dl.dropboxusercontent.com/s/e9n9dbxfg2e9tfn/ThePerfectEgg.mp4?dl=0" type=video/mp4>
-                <track label="English" kind="subtitles" srclang="en" src="hw4.vtt">
             </video>
 
             <div id="video_controls_bar">
