@@ -21,9 +21,11 @@
             var vid, playbtn;
 
             function initializePlayer () {
+                // set object references
                 vid = document.getElementById("video");
                 playbtn = document.getElementById("playpausebtn");
-                
+                // add event listeners
+                playbtn.addEventListener("click",playPause,false);
             }
             window.onload = initializePlayer;
 
@@ -41,12 +43,12 @@
     <body>
         <h1>Homework 4: Custom Media Players</h1>
         <div id="video_player_box">
-            <video id="video" width="960" height="720" autoplay>
+            <video id="video" width="960" height="720">
                 <source src="https://dl.dropboxusercontent.com/s/e9n9dbxfg2e9tfn/ThePerfectEgg.mp4?dl=0" type=video/mp4>
             </video>
 
             <div id="video_controls_bar">
-                <button id="playpausebtn" onclick="playPause()">Pause</button>
+                <button id="playpausebtn">Pause</button>
             </div>
         </div>
     </body>
