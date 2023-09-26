@@ -52,8 +52,8 @@
                 seekslider.value = nt;
                 var curmins = Math.floor(vid.currentTime / 60);
                 var cursecs = Math.floor(vid.currentTime - curmins * 60);
-                var durmins = Math.floor(vid.currentTime / 60);
-                var dursecs = Math.floor(vid.currentTime - curmins * 60);
+                var durmins = Math.floor(vid.duration / 60);
+                var dursecs = Math.floor(vid.duration - durmins * 60);
                 if(cursecs < 10) {
                     cursecs = "0"+cursecs;
                 }
