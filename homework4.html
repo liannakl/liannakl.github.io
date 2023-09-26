@@ -18,13 +18,15 @@
             }
         </style> 
         <script>
-            var vid, playbtn, seekslider;
+            var vid, playbtn, seekslider, curtimetext, durtimetext;
 
             function initializePlayer () {
                 // set object references
                 vid = document.getElementById("video");
                 playbtn = document.getElementById("playpausebtn");
                 seekslider = document.getElementById("seekslider");
+                curtimetext = document.getElementById("curtimetext");
+                durtimetext = document.getElementById("durtimetext");
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
                 seekslider.addEventListener("change",vidSeek,false);
@@ -48,6 +50,18 @@
             function seektimeupdate () {
                 var nt = vid.currentTime * (100/ vid.duration);
                 seekslider.value = nt;
+                var curmins = Math.floor(vid.currentTime / 60);
+                var cursecs = Math.floor(vid.currentTime - curmins * 60);
+                var durmins = Math.floor(vid.currentTime / 60);
+                var dursecs = Math.floor(vid.currentTime - curmins * 60);
+                if(cursecs < 10) {
+                    cursecs = "0"+cursecs;
+                }
+                if(dursecs < 10) {
+                    dursecs = "0"+dursecs;
+                }
+                curtimetext.innerHTML = curmins+":"+cursecs;
+                durtimetext.innerHTML = durmins+":"+dursecs;
             }
         </script>
     </head>
@@ -60,7 +74,8 @@
 
             <div id="video_controls_bar">
                 <button id="playpausebtn">Pause</button>
-                <input id="seekslider" type="range" min="0" max="100" value="0" step="1" style="width: 250px;">
+                <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+                <span id="curtimetext"></span> / <span id="durtimetext"></span>
             </div>
         </div>
     </body>
