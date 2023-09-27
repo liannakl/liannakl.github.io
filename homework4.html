@@ -1,131 +1,157 @@
 <!DOCTYPE html>
+
 <html>
-  <head>
-    <title>Homework 4</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <style>
-      button {
-        border: none;
-        cursor: pointer;
-        outline: none;
-      }
+    <head>
+        <meta charset="utf-8">
+			<title>Homework 4</title>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <style>
+            div#video_player_box{
+                width: 960px;
+                height: 720px;
+                background: black;
+                margin: 0px auto;
+            }
+            div#video_controls_bar{
+                background:#333;
+                padding: 10px;
+                font-family:'Courier New', Courier, monospace;
+            }
+            button#playpausebtn {
+                cursor:pointer;
+            }
+            input#seekslider{
+                width: 350px;
+            }
+            input#volumeslider{
+                width:150px;
+            }
+            input[type='range'] {
+                appearance: none !important;
+                background: #000;
+                border: #666 1px solid;
+                height: 4px;
+            }
+            input[type='range']::-webkit-slider-thumb {
+                appearance: none !important;
+                background: white;
+                height: 15px;
+                width: 15px;
+                border-radius: 100%;
+                cursor: pointer;
+            }
+        </style> 
+        <script>
+            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, ff1, ff2;
 
-      input {
-        outline: none;
-      }
+            function initializePlayer () {
+                // set object references
+                vid = document.getElementById("video");
+                playbtn = document.getElementById("playpausebtn");
+                seekslider = document.getElementById("seekslider");
+                curtimetext = document.getElementById("curtimetext");
+                durtimetext = document.getElementById("durtimetext");
+                mutebtn = document.getElementById("mutebtn");
+                volumeslider = document.getElementById("volumeslider");
+                fullscreenbtn = document.getElementById("fullscreenbtn");
+                ff1 = document.getElementById ("ff1");
+                ff2 = document.getElementById ("ff2");
 
-      button#playpausebtn{
-        background-image: url("play.jpg");
-        width: 50px;
-        height: 50px;
-      }
+                // add event listeners
+                playbtn.addEventListener("click",playPause,false);
+                seekslider.addEventListener("change",vidSeek,false);
+                vid.addEventListener("timeupdate",seektimeupdate,false);
+                mutebtn.addEventListener ("click",vidmute,false);
+                volumeslider.addEventListener("change",setvolume,false);
+                fullscreenbtn.addEventListener ("click",toggleFullScreen,false);
+                ff1.addEventListener("click", function (){
+                document.querySelector('video').playbackRate = 1.5;
+            })
+            ff2.addEventListener("click", function (){
+                document.querySelector('video').playbackRate = 3.0;
+            })
+            }
+            window.onload = initializePlayer;
 
-      button#mutebtn{
-        background-image: url("unmute.jpg");
-        width: 50px;
-        height: 50px;
-      }
+            function playPause() {
+                if(vid.paused) {
+                    vid.play();
+                    playbtn.innerHTML = "Pause";
+                } else {
+                    vid.pause();
+                    playbtn.innerHTML = "Play";
+                }
+            }
+            function vidSeek() {
+                var seekto = vid.duration * (seekslider.value / 100);
+                vid.currentTime = seekto;
+            }
+            function seektimeupdate () {
+                var nt = vid.currentTime * (100/ vid.duration);
+                seekslider.value = nt;
+                var curmins = Math.floor(vid.currentTime / 60);
+                var cursecs = Math.floor(vid.currentTime - curmins * 60);
+                var durmins = Math.floor(vid.duration / 60);
+                var dursecs = Math.floor(vid.duration - durmins * 60);
+                if(cursecs < 10) {
+                    cursecs = "0"+cursecs;
+                }
+                if(dursecs < 10) {
+                    dursecs = "0"+dursecs;
+                }
+                curtimetext.innerHTML = curmins+":"+cursecs;
+                durtimetext.innerHTML = durmins+":"+dursecs;
+            }
+            function vidmute () {
+                if(vid.muted == false){
+                    vid.muted = true;
+                    mutebtn.innerHTML ="Unmute";
+                } else {
+                    vid.muted=false;
+                    mutebtn.innerHTML ="Mute";
+                }
+            }
+            function setvolume () {
+                vid.volume = volumeslider.value / 100;
+            }
+            function toggleFullScreen () {
+                if(vid.requestFullScreen) {
+                    vid.requestFullScreen ();
+                } else if(vid.webkitRequestFullScreen) {
+                    vid.webkitRequestFullScreen ();
+                } else if (vid.mozRequestFullScreen) {
+                    vid.mozRequestFullScreen ();
+                }
+            }
+            
+        </script>
+    </head>
+    <body>
+        <h1>Homework 4: Custom Media Players</h1>
+        <div id="video_player_box">
+            <video id="video" width="960" height="720">
+                <source src="https://dl.dropboxusercontent.com/s/e9n9dbxfg2e9tfn/ThePerfectEgg.mp4?dl=0" type=video/mp4>
+            </video>
 
-      input#seekslider {
-        width: 300px;
-      }
+            <div id="video_controls_bar">
+                <button id="playpausebtn">Play</button>
+                <span id="curtimetext" style="color: white;">0:00</span> 
+                <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+                <span id="durtimetext" style="color: white;">0:00</span>
+                <button id="ff1">&#62;</button>
+                <button id="ff2">&#62;&#62;</button>
+                <button id="mutebtn">Mute</button>
+                <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+                <button id="fullscreenbtn">[ &nbsp; ]</button>
+            </div>
+        </div>
 
-      input#volumeslider {
-        width: 150px;
-      }
+        <br>
+        
+        <button>
+            <a href="https://liannakl.github.io/homework4/audio.html">audio player</a>
+        </button>
 
-      input[type='range'] {
-        appearance: none !important;
-        background: #000;
-        border: #666 1px solid;
-        height: 4px;
-      }
+    </body>
 
-      input [type='range']::-ms-fill-lower {
-        background: #000;
-      }
-
-      input [type='range']::-ms-fill-upper {
-        background: #000;
-      }
-
-      input [type='range']::-moz-range-track {
-        background: #000;
-      }
-
-      input[type='range']::-webkit-slider-thumb {
-        appearance: none !important;
-        background: white;
-        height: 15px;
-        width: 15px;
-        border-radius: 100%;
-        border: black 1px solid;
-        cursor: pointer;
-      }
-
-      input [type='range']::-moz-slider-thumb {
-        appearance: none !important;
-        background: white;
-        height: 15px;
-        width: 15px;
-        border-radius: 100%;
-        cursor: pointer;
-      }
-
-      input [type='range']::-ms-slider-thumb {
-        appearance: none !important;
-        background: white;
-        height: 15px;
-        width: 15px;
-        border-radius: 100%;
-        cursor: pointer;
-      }
-    </style>
-    <script>
-      var audio, playbtn, mutebtn, seekslider, volumeslider;
-      function initAudioPlayer() {
-        audio = new Audio ();
-        audio.src = "https://dl.dropboxusercontent.com/scl/fi/trr4ytelknnqwin6tyotd/680399__noel0319__keepin-the-pace.wav?rlkey=tqi602neksob8f14n77gn9lmz&dl=0";
-        audio.loop = true;
-        audio.play();
-
-        //set object references
-        playbtn = document.getElementById("playpausebtn");
-        mutebtn = document.getElementById("mutebtn");
-        seekslider = document.getElementById("seekslider");
-        vlumeslider = document.getElementById("volumeslider");
-
-        //add event listeners
-        playbtn.addEventListener("click",playPause);
-        mutebtn.addEventListener("click",mute);
-
-        //functions
-        function playPause(){
-          if (audio.paused) {
-            audio.play();
-            playbtn.style.background = "url(pause.jpg) no-repeat";
-          } else {
-            audio.pause();
-            playbtn.style.background = "url(play.jpg) no-repeat";
-          }
-        }
-        function mute(){
-          if(audio.muted) {
-            audio.muted = false;
-            mutebtn.style.background = "url(unmute.jpg) no-repeat";
-          } else {
-            audio.muted = true;
-            mutebtn.style.background = "url(mute.jpg) no-repeat";
-          }
-        }
-      }
-      window.addEventListener("load", initAudioPlayer)
-    </script>
-  </head>
-  <body>
-    <button id="playpausebtn"></button>
-    <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
-    <button id="mutebtn"></button>
-    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
-  </body>
 </html>
