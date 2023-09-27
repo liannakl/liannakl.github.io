@@ -1,4 +1,4 @@
-function getInputValue()drivers{
+function getInputValue(){
     // Selecting the input element and get its value 
     var inputVal = document.getElementById("myInput").value;
     //Displaying the Value on the page
