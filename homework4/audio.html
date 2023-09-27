@@ -4,34 +4,23 @@
   <head>
     <meta charset="UTF-8">
     <style>
-      
+      body{
+        background: #666;
+      }
+
       button {
         border: none;
         cursor: pointer;
       }
 
-      .playbtnouter{
-        margin: 25% auto;
-        width: 10em;
-        height: 10em;
-        background-color: rgba(0, 0, 0, .25);
-        cursor: pointer;
-      } 
-
       button#playpausebtn{
-        margin: 0 auto;
-        top: 25%;
-        position: relative;  
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 2.5em 0 2.5em 5em;
-        border-color: transparent transparent transparent #000;
-        opacity: .75;
+        background: url(https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_pause_circle_filled_48px-1024.png) no-repeat;
+        width: 50px;
+        height: 50px;
       }
 
       button#mutebtn{
-        background: url("https://www.clker.com/cliparts/X/d/d/H/1/Y/white-no-symbol-hi.png") no-repeat;
+        background: url(https://cdn0.iconfinder.com/data/icons/google-material-design-3-0/48/ic_volume_mute_48px-1024.png) no-repeat;
         width: 50px;
         height: 50px;
       }
@@ -49,10 +38,7 @@
     </script>
   </head>
   <body>
-    <div class="playbtnouter">
-      <button id="playpausebtn"></button>
-      
-    </div>
-    
+    <button id="playpausebtn"></button>
+    <button id="mutebtn"></button>
   </body>
 </html>
