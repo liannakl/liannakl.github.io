@@ -42,7 +42,7 @@
             }
         </style> 
         <script>
-            let vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, ff1, ff2;
+            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, ff1, ff2;
 
             function initializePlayer () {
                 // set object references
@@ -55,7 +55,7 @@
                 volumeslider = document.getElementById("volumeslider");
                 fullscreenbtn = document.getElementById("fullscreenbtn");
                 ff1 = document.getElementById ("ff1");
-                ff2 = document.getElementById ("f2");
+                ff2 = document.getElementById ("ff2");
 
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
