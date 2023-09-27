@@ -148,7 +148,7 @@
           var nt = audio.currentTime * (100 / audio.duration);
           seekslider.value = nt;
           var curmins = Math.floor(audio.currentTime / 60);
-          var cursecs = Math.floor(audio.currentTime - durmins * 60);
+          var cursecs = Math.floor(audio.currentTime - curmins * 60);
           var durmins = Math.floor(audio.duration / 60);
           var dursecs = Math.floor(audio.duration - durmins * 60);
           if (cursecs < 10) {
