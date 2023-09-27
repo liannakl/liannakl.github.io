@@ -21,10 +21,10 @@
                 cursor:pointer;
             }
             input#seekslider{
-                width: 400px;
+                width: 350px;
             }
             input#volumeslider{
-                width:200px;
+                width:150px;
             }
             input[type='range'] {
                 appearance: none !important;
@@ -42,7 +42,7 @@
             }
         </style> 
         <script>
-            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, reverse1, reverse2, ff1, ff2;
+            let vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, ff1, ff2;
 
             function initializePlayer () {
                 // set object references
