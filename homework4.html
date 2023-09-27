@@ -64,6 +64,9 @@
                 mutebtn.addEventListener ("click",vidmute,false);
                 volumeslider.addEventListener("change",setvolume,false);
                 fullscreenbtn.addEventListener ("click",toggleFullScreen,false);
+                ff1.addEventListener("click", function (){
+                document.querySelector('video').playbackRate = 2.0;
+            })
             }
             window.onload = initializePlayer;
 
@@ -117,10 +120,6 @@
                     vid.mozRequestFullScreen ();
                 }
             }
-            
-            ff1.addEventListener("click", function (){
-                document.querySelector('video').playbackRate = 2.0;
-            })
             
         </script>
     </head>
