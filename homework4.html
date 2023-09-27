@@ -82,7 +82,7 @@
       }
     </style>
     <script>
-      var audio, playbtn, mutebtn, seek_bar;
+      var audio, playbtn, mutebtn, seekslider, volumeslider, seeking;
       function initAudioPlayer() {
         audio = new Audio ();
         audio.src = "https://dl.dropboxusercontent.com/scl/fi/trr4ytelknnqwin6tyotd/680399__noel0319__keepin-the-pace.wav?rlkey=tqi602neksob8f14n77gn9lmz&dl=0";
@@ -92,10 +92,15 @@
         //set object references
         playbtn = document.getElementById("playpausebtn");
         mutebtn = document.getElementById("mutebtn");
+        seekslider = document.getElementById("seekslider");
+        vlumeslider = document.getElementById("volumeslider");
 
         //add event listeners
         playbtn.addEventListener("click",playPause);
-        mutebtn.addEventListener("click",mute)
+        mutebtn.addEventListener("click",mute);
+        seekslider.addEventListener("mousedown", function (event) { seeking=true; seek(event);});
+        seekslider.addEventListener("mousemove", function (event) {seek(event);});
+        volumeslider.addEventListener("mousemove", setvolume)
 
         //functions
         function playPause(){
@@ -116,7 +121,11 @@
             mutebtn.style.background = "url(mute.jpg) no-repeat";
           }
         }
+        function setvolume () {
+            sudio.volume = volumeslider.value / 100;
+        }
       }
+
       window.addEventListener("load", initAudioPlayer)
     </script>
   </head>
