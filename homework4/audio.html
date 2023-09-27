@@ -26,6 +26,17 @@
         height: 50px;
       }
 
+      button#ff1{
+        background-image: url("ff1.jpg");
+        width: 50px;
+        height: 50px;
+      }
+      button#ff2{
+        background-image: url("ff2.jpg");
+        width: 50px;
+        height: 50px;
+      }
+
       input#seekslider {
         width: 300px;
       }
@@ -105,6 +116,8 @@
         volumeslider = document.getElementById("volumeslider");
         curtimetext = document.getElementById("curtimetext");
         durtimetext = document.getElementById("durtimetext");
+        ff1 = document.getElementById ("ff1");
+        ff2 = document.getElementById ("ff2");
 
         //add event listeners
         playbtn.addEventListener("click",playPause);
@@ -114,6 +127,8 @@
         seekslider.addEventListener("mouseup", function () { seeking=false; });
         volumeslider.addEventListener("mousemove",setvolume);
         audio.addEventListener("timeupdate", function() { seektimeupdate(); })
+        ff1.addEventListener("click", function (){ document.querySelector('video').playbackRate = 1.5;})
+        ff2.addEventListener("click", function (){ document.querySelector('video').playbackRate = 3.0; })
 
         //functions
         function playPause(){
@@ -176,6 +191,8 @@
       <span id="curtimetext">0:00</span>
       <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
       <span id="durtimetext">0:00</span>
+      <button id="ff1">&#62;</button>
+      <button id="ff2">&#62;&#62;</button>
       <button id="mutebtn"></button>
       <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
     </div>
