@@ -95,12 +95,12 @@
                 durtimetext.innerHTML = durmins+":"+dursecs;
             }
             function vidmute () {
-                if(vid.muted) {
-                    vid.muted = false;
-                    mutebtn.inner.HTML = "Mute";
-                } else {
+                if(vid.muted == false){
                     vid.muted = true;
-                    mutebtn.innerHTML = "Unmute";
+                    mutebtn.innerHTML ="Unmute";
+                } else {
+                    vid.muted=false;
+                    mutebtn.innerHTML ="Mute";
                 }
             }
             function setvolume () {
