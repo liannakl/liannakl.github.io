@@ -122,6 +122,9 @@
             mutebtn.style.background = "url(mute.jpg) no-repeat";
           }
         }
+        function setvolume () {
+            sudio.volume = volumeslider.value / 100;
+        }
       }
       window.addEventListener("load", initAudioPlayer)
     </script>
