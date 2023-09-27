@@ -4,7 +4,23 @@
     <title>Homework 4</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+      
+      
+      button {
+        border: none;
+        cursor: pointer;
+      }
+      button#playpausebtn{
+        background-image: url("play.jpg");
+        width: 50px;
+        height: 50px;
+      }
 
+      button#mutebtn{
+        background-image: url("mute.jpg");
+        width: 50px;
+        height: 50px;
+      }
     </style>
     <script>
       var audio, playbtn, seek_bar;
@@ -12,12 +28,12 @@
         audio = new Audio ();
         audio.src = "https://dl.dropboxusercontent.com/scl/fi/trr4ytelknnqwin6tyotd/680399__noel0319__keepin-the-pace.wav?rlkey=tqi602neksob8f14n77gn9lmz&dl=0";
         audio.loop = true;
-        audio.play();
       }
       window.addEventListener("load", initAudioPlayer)
     </script>
   </head>
   <body>
-
+    <button id="playpausebtn"></button>
+    <button id="mutebtn"></button>
   </body>
 </html>
