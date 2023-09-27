@@ -34,6 +34,17 @@
         width: 150px;
       }
 
+      div#timebox{
+        display: inline-block;
+        width: 500px;
+        background: #000;
+        border-bottom: #333 1px solid;
+        text-align: center;
+        color: #09F;
+        font-family:'Courier New', Courier, monospace;
+        font-size: 14px;
+      }
+
       input[type='range'] {
         appearance: none !important;
         background: #000;
@@ -100,6 +111,7 @@
         mutebtn.addEventListener("click",mute);
         seekslider.addEventListener("mousedown", function (event) { seeking=true; seek(event);});
         seekslider.addEventListener("mousemove", function (event) {seek(event);});
+        seekslider.addEventListener("mouseup", function () { seeking=false; });
         volumeslider.addEventListener("mousemove",setvolume);
 
         //functions
@@ -121,6 +133,13 @@
             mutebtn.style.background = "url(mute.jpg) no-repeat";
           }
         }
+        function seek(event) {
+          if (seeking) {
+            seekslider.value = event.clientX - seekslider.offsetLeft;
+            var seekto = audio.duration * (seekslider.value / 100);
+            audio.currentTime = seekto;
+          }
+        }
         function setvolume () {
             audio.volume = volumeslider.value / 100;
         }
@@ -129,9 +148,13 @@
     </script>
   </head>
   <body>
-    <button id="playpausebtn"></button>
-    <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
-    <button id="mutebtn"></button>
-    <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+    <div id="timebox">
+      <button id="playpausebtn"></button>
+      <span id="curtimetext">0:00</span>
+      <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
+      <span id="durtimetext">0:00</span>
+      <button id="mutebtn"></button>
+      <input id="volumeslider" type="range" min="0" max="100" value="100" step="1">
+    </div>
   </body>
 </html>
