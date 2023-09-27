@@ -65,6 +65,8 @@
                 volumeslider.addEventListener("change",setvolume,false);
                 fullscreenbtn.addEventListener ("click",toggleFullScreen,false);
                 ff1.addEventListener("click", function (){
+                document.querySelector('video').playbackRate = 0.5;
+                ff2.addEventListener("click", function (){
                 document.querySelector('video').playbackRate = 2.0;
             })
             }
