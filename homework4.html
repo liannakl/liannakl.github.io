@@ -42,7 +42,7 @@
             }
         </style> 
         <script>
-            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn;
+            var vid, playbtn, seekslider, curtimetext, durtimetext, mutebtn, volumeslider, fullscreenbtn, reverse1, reverse2, ff1, ff2;
 
             function initializePlayer () {
                 // set object references
@@ -54,6 +54,8 @@
                 mutebtn = document.getElementById("mutebtn");
                 volumeslider = document.getElementById("volumeslider");
                 fullscreenbtn = document.getElementById("fullscreenbtn");
+                ff1 = document.getElementById ("ff1");
+                ff2 = document.getElementById ("f2");
 
                 // add event listeners
                 playbtn.addEventListener("click",playPause,false);
@@ -115,6 +117,13 @@
                     vid.mozRequestFullScreen ();
                 }
             }
+            
+            ff1.addEventListener("click", function (){
+                document.querySelector('video').playbackRate = 2.0;
+            })
+            ff2.addEventListener("click", function (){
+                document.querySelector('video').playbackRate = 5.0;
+            })
         </script>
     </head>
     <body>
@@ -126,8 +135,6 @@
 
             <div id="video_controls_bar">
                 <button id="playpausebtn">Play</button>
-                <button id="reverse1">&#60;</button>
-                <button id="reverse2">&#60;&#60;</button>
                 <span id="curtimetext" style="color: white;">0:00</span> 
                 <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
                 <span id="durtimetext" style="color: white;">0:00</span>
