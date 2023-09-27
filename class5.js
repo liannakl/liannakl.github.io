@@ -1,4 +1,4 @@
-function getInputValue()driversseasonal{
+function getInputValue()drivers{
     // Selecting the input element and get its value 
     var inputVal = document.getElementById("myInput").value;
     //Displaying the Value on the page
@@ -8,7 +8,7 @@ var driver = inputVal;
 
 if (driver === 'Max Verstappen') {
 console.log('Two time Formula 1 World Champion with Red Bull Racing');
-document.getElementById("drivers").innerHTML= "<img src='https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/verstappen.jpg.img.640.medium.jpg/1677069646195.jpg'>";
+document.getElementById("drivers").innerHTML= "<img src='https://i.pinimg.com/736x/29/a7/97/29a797972ea730a4ff4b26855e6afa3f.jpg'>";
 
 }else if(season === 'winter'){
 document.getElementById("drivers").innerHTML= "<img src='winter.jpg'>";
