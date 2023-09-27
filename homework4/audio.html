@@ -4,13 +4,19 @@
   <head>
     <meta charset="UTF-8">
     <style>
-      body{
-        background: #666;
-      }
+      
       button {
         border: none;
         cursor: pointer;
       }
+
+      .playbtnouter{
+        margin: 25% auto;
+        width: 10em;
+        height: 10em;
+        background-color: rgba(0, 0, 0, .25);
+        cursor: pointer;
+      } 
 
       button#playpausebtn{
         margin: 0 auto;
@@ -43,6 +49,7 @@
     </script>
   </head>
   <body>
+    <div class="playbtnouter"></div>
     <button id="playpausebtn"></button>
     <button id="mutebtn"></button>
   </body>
