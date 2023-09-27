@@ -145,21 +145,21 @@
             audio.volume = volumeslider.value / 100;
         }
         function seektimeupdate () {
-          var nt = audio.currentTime * (100 / audio.duration);
+          var nt = vid.currentTime * (100 / audio.duration);
           seekslider.value = nt;
-          var curmins = Math.floor(vid.currentTime / 60);
-          var cursecs = Math.floor(vid.currentTime - curmins * 60);
-          var durmins = Math.floor(vid.duration / 60);
-          var dursecs = Math.floor(vid.duration - durmins * 60);
+          var curmins = Math.floor(audio.currentTime / 60);
+          var cursecs = Math.floor(audio.currentTime - curmins * 60);
+          var durmins = Math.floor(audio.duration / 60);
+          var dursecs = Math.floor(audio.duration - durmins * 60);
             if(cursecs < 10) {
                 cursecs = "0"+cursecs;
             }
             if(dursecs < 10) {
                 dursecs = "0"+dursecs;
-            }
+                }
             curtimetext.innerHTML = curmins+":"+cursecs;
             durtimetext.innerHTML = durmins+":"+dursecs;
-        }
+            }
       }
       window.addEventListener("load", initAudioPlayer)
     </script>
