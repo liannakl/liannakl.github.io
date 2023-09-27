@@ -145,21 +145,27 @@
             audio.volume = volumeslider.value / 100;
         }
         function seektimeupdate () {
-          var nt = vid.currentTime * (100 / audio.duration);
+          var nt = audio.currentTime * (100 / audio.duration);
           seekslider.value = nt;
           var curmins = Math.floor(audio.currentTime / 60);
-          var cursecs = Math.floor(audio.currentTime - curmins * 60);
+          var cursecs = Math.floor(audio.currrentTime - durmins * 60);
           var durmins = Math.floor(audio.duration / 60);
           var dursecs = Math.floor(audio.duration - durmins * 60);
-            if(cursecs < 10) {
-                cursecs = "0"+cursecs;
-            }
-            if(dursecs < 10) {
-                dursecs = "0"+dursecs;
-                }
-            curtimetext.innerHTML = curmins+":"+cursecs;
-            durtimetext.innerHTML = durmins+":"+dursecs;
-            }
+          if (cursecs < 10) {
+            cursecs = "0"+cursecs; 
+          }
+          if (dursecs < 10) {
+            dursecs = "0"+dursecs; 
+          }
+          if (curmins < 10) {
+            curmins = "0"+curmins; 
+          }
+          if (durmins < 10) {
+            durmins = "0"+durmins; 
+          }
+          curtimetext.innerHTML = curmins+":"+cursecs;
+          durtimetext.innerHTML = durmins+":"+dursecs;
+        }
       }
       window.addEventListener("load", initAudioPlayer)
     </script>
