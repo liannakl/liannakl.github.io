@@ -7,16 +7,16 @@ function getInputValue(){
 var driver = inputVal;
 
 if (driver === 'Max Verstappen') {
-console.log('Two time Formula 1 World Champion with Red Bull Racing');
+console.log('He looks like Sid from Ice Age.');
 document.getElementById("drivers").innerHTML= "<img src='https://i.pinimg.com/736x/29/a7/97/29a797972ea730a4ff4b26855e6afa3f.jpg'>";
 
-}else if(season === 'winter'){
-document.getElementById("drivers").innerHTML= "<img src='winter.jpg'>";
-console.log('It\'s winter! Everything is covered in snow.');      
+}else if(season === 'Sergio Perez'){
+document.getElementById("drivers").innerHTML= "<img src='https://i.ytimg.com/vi/5kSDh4j6AzM/maxresdefault.jpg'>";
+console.log('We call him Checo.');      
  } 
-else if(season === 'fall'){
-document.getElementById("drivers").innerHTML= "<img src='fall.jpg'>";
-console.log('It\'s fall! Leaves are falling!');      
+else if(season === 'Charles Leclerc'){
+document.getElementById("drivers").innerHTML= "<img src='https://64.media.tumblr.com/dcc0d297cb42dc4b375a0257a9a47579/1cc2ce946c406dee-eb/s640x960/d0f4c4c7f28802924d681cffefb7591a482ca0f0.png'>";
+console.log('OMG I&apos;ve never looked so good.');      
  } 
 else if(season === 'summer'){
 document.getElementById("drivers").innerHTML= "<img src='summer.jpg'>";
