@@ -16,11 +16,11 @@ console.log('We call him Checo.');
  } 
 else if(driver === 'Charles Leclerc'){
 document.getElementById("drivers").innerHTML= "<img src='https://64.media.tumblr.com/dcc0d297cb42dc4b375a0257a9a47579/1cc2ce946c406dee-eb/s640x960/d0f4c4c7f28802924d681cffefb7591a482ca0f0.png'>";
-console.log('OMG I&apos;ve never looked so good.');      
+console.log('Lord Perceval');      
  } 
-else if(driver === 'summer'){
-document.getElementById("drivers").innerHTML= "<img src='summer.jpg'>";
-console.log('It\'s sunny and warm because it\'s summer!');      
+else if(driver === 'Carlos Sainz'){
+document.getElementById("drivers").innerHTML= "<img src='https://i.pinimg.com/736x/f2/1d/4b/f21d4b9e5cbf8b7a47ccb9e474695595.jpg'>";
+console.log('Smooth Operator');      
  } 
 else {
 console.log('Invalid season.');
