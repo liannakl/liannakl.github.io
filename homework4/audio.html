@@ -8,17 +8,32 @@
     <style>
       body {
         height: 100%;
-        background: rgb(255, 192, 242);
+        background: #557276;
+      }
+
+      img {
+        width: 350px;
+        height: auto;
+
+      }
+
+      .center {
+        margin: auto;
+        padding: 10px;
+        text-align: center;
+        display: block;
       }
 
       button {
         border: none;
         cursor: pointer;
         outline: none;
+        margin-top: 10px;
       }
 
       input {
         outline: none;
+        margin-bottom: 20px;
       }
 
       button#playpausebtn{
@@ -42,12 +57,13 @@
       }
 
       div#timebox{
-        display: inline-block;
-        width: 1000px;
+        width: 710px;
+        height: 75px;
         text-align: center;
-        color: #09F;
+        color: black;
         font-family:'Courier New', Courier, monospace;
         font-size: 14px;
+        background: white;
       }
 
       input[type='range'] {
@@ -101,7 +117,7 @@
       var audio, playbtn, mutebtn, seekslider, volumeslider, seeking=false, seekto, curtimetext, durtimetext;
       function initAudioPlayer() {
         audio = new Audio ();
-        audio.src = "https://dl.dropboxusercontent.com/scl/fi/trr4ytelknnqwin6tyotd/680399__noel0319__keepin-the-pace.wav?rlkey=tqi602neksob8f14n77gn9lmz&dl=0";
+        audio.src = "https://dl.dropboxusercontent.com/scl/fi/5s6r94pegjsdwxrnbqz5n/void.mp3?rlkey=8brcz8xy5rc7xltxqwlke6182&dl=0";
         audio.loop = true;
         audio.play();
 
@@ -180,7 +196,15 @@
     </script>
   </head>
   <body>
-    <div id="timebox">
+    <h1>Homework 4: Custom Audio Player</h1>
+
+    <h3 style="text-align: center;">Void by CORPSE</h3>
+
+    <img src="https://images.genius.com/16cf2c5123d74884a46fb40ddaf448ee.500x500x1.jpg" class="center">
+
+    <br>
+
+    <div id="timebox" class="center">
       <button id="playpausebtn"></button>
       <span id="curtimetext">0:00</span>
       <input id="seekslider" type="range" min="0" max="100" value="0" step="1">
