@@ -83,7 +83,8 @@ console.log('A neon blue.');}
  
 //other
 else {
-    console.log('That color has not been added yet.')
+    console.log('Invalid color.')
+    document.getElementById("square").innerHTML= "That color has not been added yet.";
 }
 
  } 
