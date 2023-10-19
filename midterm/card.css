@@ -2,7 +2,7 @@
     box-sizing: border-box;
   }
   
-  html {
+  /*html {
     font-size: 18px;
     line-height: 1.5;
     font-weight: 300;
@@ -26,6 +26,7 @@
     flex-wrap: wrap;
     max-width: 1000px;
   }
+  */
   
   .heading {
     width: 100%;
