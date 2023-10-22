@@ -14,14 +14,32 @@
                 margin-left: auto;
                 margin-right: auto;
             }
+            .search-icon svg {
+                height: 40px;
+            }
+            button.btn {
+                background: #e20000;
+            }
         </style>
         
         <title>F1's Greatest Drivers</title>
     </head>
     <body>
-        <img src="img/title.png" width="1000" class="center">
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-11">
+                    <img src="img/title.png" width="1000" class="center">
+                </div>
+                <div class="col">
+                    <div class="search-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+                </svg>
+            </div>
+                </div>
+            </div>
+        </div>
 
-        <br>
         <br>
 
         <div>
@@ -34,9 +52,12 @@
             <div id="history"></div>
         </div>
 
-        <div class="dropdown-center">
-            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Centered dropdown
+        <br>
+        <br>
+
+        <div class="dropdown-center center">
+            <button class="btn btn-secondary dropdown-toggle center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Select a Driver
         </button>
             <ul class="dropdown-menu">
                 <li><a class="dropdown-item" href="hamilton.html">Lewis Hamilton</a></li>
