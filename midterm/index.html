@@ -76,7 +76,7 @@
             const wikipediaDomain = 'en.wikipedia.org';
             const articleTitle = 'Formula_One';
 
-            fetch(`https://${wikipediaDomain}/w/api.php?action=query&prop=extracts&exintro&titles=${articleTitle}&format=json`)
+            fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=Formula_One&format=json`)
                 .then(response => response.json())
                 .then(data => {
                     const pageId = Object.keys(data.query.pages)[0];
