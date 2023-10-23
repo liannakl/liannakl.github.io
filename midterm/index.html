@@ -74,7 +74,7 @@
             document.getElementById("fetchData").addEventListener("click", function() {
             // Replace 'en.wikipedia.org' with your desired Wikipedia language domain
             const wikipediaDomain = 'en.wikipedia.org';
-            const articleTitle = 'Formula_One';
+            const articleTitle = 'History_of_Formula_One';
 
             fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=History_of_Formula_One&format=json`)
                 .then(response => response.json())
