@@ -48,8 +48,8 @@
             </a>
             <br>
             <br>
-            <button id="request" class="center"> Click for a brief history on Formula 1</button>
-             <div id="article-content"></div>
+            <button id="fetchData" class="center"> Click for a brief history on Formula 1</button>
+             <p id="result"></p>
         </div>
 
         <br>
@@ -70,29 +70,24 @@
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
-            // Function to fetch the Wikipedia article
-        function fetchFormulaOneArticle() {
-            // Define the Wikipedia API URL
-            const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&format=json&prop=extracts&exintro=true&titles=Formula_One';
+           document.getElementById("fetchData").addEventListener("click", function() {
+            // Replace 'en.wikipedia.org' with your desired Wikipedia language domain
+            const wikipediaDomain = 'en.wikipedia.org';
+            const articleTitle = 'Formula_One';
 
-            // Make an API request using the Fetch API
-            fetch(apiUrl)
+            fetch(`https://${wikipediaDomain}/w/api.php?action=query&prop=extracts&exintro&titles=${articleTitle}&format=json`)
                 .then(response => response.json())
                 .then(data => {
-                    const pages = data.query.pages;
-                    const pageId = Object.keys(pages)[0];
-                    const firstParagraph = pages[pageId].extract;
+                    const pageId = Object.keys(data.query.pages)[0];
+                    const firstParagraph = data.query.pages[pageId].extract;
 
-                    // Display the first paragraph in the HTML
-                    document.getElementById('article-content').textContent = firstParagraph;
+                    document.getElementById("result").innerHTML = firstParagraph;
                 })
                 .catch(error => {
-                    console.error('Error:', error);
+                    console.error(error);
+                    document.getElementById("result").innerHTML = "An error occurred while fetching data.";
                 });
-        }
-
-        // Call the function when the page loads
-        window.onload = fetchFormulaOneArticle;
+        });
 
         </script>
     </body>
