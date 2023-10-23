@@ -69,26 +69,9 @@
             </ul>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-        <script>
-            document.getElementById("fetchData").addEventListener("click", function() {
-            // Replace 'en.wikipedia.org' with your desired Wikipedia language domain
-            const wikipediaDomain = 'en.wikipedia.org';
-            const articleTitle = 'Formula_One';
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js">
 
-            fetch(`https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=History_of_Formula_One&format=json`)
-                .then(response => response.json())
-                .then(data => {
-                    const pageId = Object.keys(data.query.pages)[0];
-                    const firstParagraph = data.query.pages[pageId].extract;
 
-                    document.getElementById("result").innerHTML = firstParagraph;
-                })
-                .catch(error => {
-                    console.error(error);
-                    document.getElementById("result").innerHTML = "An error occurred while fetching data.";
-                });
-        });
         </script>
     </body>
 </html>
