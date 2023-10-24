@@ -83,6 +83,11 @@
                 if(request.readyState === 4) {
                 
                 if(request.status === 200) {
+
+                    obj = JSON.parse(request.responseText)
+                    var mainObj = obj["query"]["pages"]
+                    var pageId = Object.keys(mainObj)[0]
+                    var text = mainObj[pageID]["extract"]
                 
                     history.innerHTML = request.responseText;        
                 } else {
