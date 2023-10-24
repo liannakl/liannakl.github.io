@@ -1,1 +1,45 @@
-hello world
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Wikipedia Article Reader</title>
+</head>
+<body>
+    <h1>Retrieve the First Paragraph of a Wikipedia Article</h1>
+    <button id="fetchButton">Fetch Article</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('fetchButton').addEventListener('click', function() {
+            // Input your desired Wikipedia article title here
+            var articleTitle = 'Albert_Einstein';
+
+            // Construct the URL for the Wikipedia API
+            var apiUrl = 'https://en.wikipedia.org/w/api.php?action=parse&page=' + articleTitle +
+                '&format=json&section=0&prop=text&callback=?';
+
+            // Send an AJAX request to retrieve the article
+            $.ajax({
+                url: apiUrl,
+                dataType: 'json',
+                success: function(data) {
+                    // Extract the first paragraph from the JSON response
+                    var firstParagraph = data.parse.text['*'].match(/<p>(.*?)<\/p>/)[1];
+                    
+                    // Create a temporary element to parse the HTML content
+                    var tempElement = document.createElement('div');
+                    tempElement.innerHTML = firstParagraph;
+
+                    // Display the first paragraph in the 'result' div
+                    document.getElementById('result').innerHTML = tempElement.textContent;
+                },
+                error: function() {
+                    document.getElementById('result').innerHTML = 'An error occurred while fetching the article.';
+                }
+            });
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>
+
