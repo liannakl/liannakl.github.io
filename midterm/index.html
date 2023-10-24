@@ -71,27 +71,42 @@
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
         <script>
-          (function () {
-            'use strict';
-            var btn = document.getElementById('request');
-            var bio = document.getElementById('bio');
-            var request = new XMLHttpRequest ();
-            request.onreadystatechange = function() {
-                if(request.readyState === 4) {
-                    bio.style.border = '1px solid #e8e8e8';
-                    if(request.status === 200) {
-                        bio.innerHTML = request.responseText;
-                    } else {
-                        bio.innerHTML = 'An error occurred during your request: ' + request.status + ' ' + request.statusText;
-                    }
-                }
-            }
-            btn.addEventListener ('click', function () {
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=parse&page=History_of_Formula_One&format=json');
+          (function() {
+ 'use strict';
+ // find the desired selectors
+  var btn = document.getElementById('request');
+  var bio = document.getElementById('bio');
+  // set up a request
+  var request = new XMLHttpRequest();
+  // keep track of the request
+  request.onreadystatechange = function() {
+    // check if the response data send back to us 
+    if(request.readyState === 4) {
+      // add a border
+      bio.style.border = '1px solid #e8e8e8';
+      // uncomment the line below to see the request
+      // console.log(request);
+      // check if the request is successful
+      if(request.status === 200) {
+        // update the HTML of the element
+        bio.innerHTML = request.responseText;        
+      } else {
+        // otherwise display an error message
+        bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+      }
+    }
+  }
+ // specify the type of request
+ // register an event
+  btn.addEventListener('click', function() {
+    // hide the button
+    //this.style.display = 'none';
+    // send the request
+      request.open('Get', 'https://en.wikipedia.org/w/api.php?action=parse&page=History_of_Formula_One&format=json');
 
-            request.send();
-            });
-          });  
+    request.send();
+  });
+  })();  
         </script>
     </body>
 </html>
