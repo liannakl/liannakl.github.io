@@ -1,45 +1,48 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Wikipedia Article Reader</title>
+    <title>Formula One Wikipedia Article</title>
 </head>
 <body>
-    <h1>Retrieve the First Paragraph of a Wikipedia Article</h1>
-    <button id="fetchButton">Fetch Article</button>
-    <div id="result"></div>
+    <h1>Formula One Wikipedia Article</h1>
+    <button onclick="getFormulaOneArticle()">Get Formula One Article</button>
+    <div id="article">
+        <p id="first-paragraph"></p>
+    </div>
 
     <script>
-        document.getElementById('fetchButton').addEventListener('click', function() {
-            // Input your desired Wikipedia article title here
-            var articleTitle = 'Albert_Einstein';
+        function getFormulaOneArticle() {
+            // Replace 'en.wikipedia.org' with the relevant Wikipedia domain if needed.
+            const apiUrl = 'https://en.wikipedia.org/w/api.php';
+            const pageTitle = 'History_of_Formula_One';
+            const params = {
+                action: 'query',
+                prop: 'extracts',
+                format: 'json',
+                exintro: true,
+                titles: pageTitle,
+            };
 
-            // Construct the URL for the Wikipedia API
-            var apiUrl = 'https://en.wikipedia.org/w/api.php?action=parse&page=' + articleTitle +
-                '&format=json&section=0&prop=text&callback=?';
+            const queryString = Object.keys(params)
+                .map(key => key + '=' + encodeURIComponent(params[key]))
+                .join('&');
 
-            // Send an AJAX request to retrieve the article
-            $.ajax({
-                url: apiUrl,
-                dataType: 'json',
-                success: function(data) {
-                    // Extract the first paragraph from the JSON response
-                    var firstParagraph = data.parse.text['*'].match(/<p>(.*?)<\/p>/)[1];
-                    
-                    // Create a temporary element to parse the HTML content
-                    var tempElement = document.createElement('div');
-                    tempElement.innerHTML = firstParagraph;
+            const url = `${apiUrl}?${queryString}`;
 
-                    // Display the first paragraph in the 'result' div
-                    document.getElementById('result').innerHTML = tempElement.textContent;
-                },
-                error: function() {
-                    document.getElementById('result').innerHTML = 'An error occurred while fetching the article.';
+            // Make an AJAX request to retrieve the Wikipedia article.
+            const xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    const pageId = Object.keys(response.query.pages)[0];
+                    const firstParagraph = response.query.pages[pageId].extract;
+                    const firstParagraphElement = document.getElementById('first-paragraph');
+                    firstParagraphElement.innerHTML = firstParagraph;
                 }
-            });
-        });
+            };
+            xhr.send();
+        }
     </script>
-
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </body>
 </html>
-
