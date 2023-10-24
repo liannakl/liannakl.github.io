@@ -87,7 +87,7 @@
                 }
             }
             btn.addEventListener ('click', function () {
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=History_of_Formula_One');
+                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=History%20of%20Formula%20One&format=json');
 
             request.send();
             });
