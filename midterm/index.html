@@ -88,7 +88,7 @@
                     obj = JSON.parse(request.responseText)
                     var mainObj = obj["query"]["pages"]
                     var pageId = Object.keys(mainObj)[0]
-                    var text = mainObj[pageID]["extract"]
+                    var text = mainObj[pageId]["extract"]
                 
                     history.innerHTML = request.responseText;        
                 } else {
