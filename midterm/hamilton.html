@@ -29,36 +29,36 @@
             <div class="row">
                 <div class="col-8">
 
-<div class="content">
+            <div class="content">
 
-    <a class="card" href="#!">
-      <div class="front" style="background-image: url(https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/hamilton.jpg.img.1920.medium.jpg/1677069594164.jpg)">
-        
-      </div>
-      <div class="back">
-        <div>
-          <img src="https://media.formula1.com/content/dam/fom-website/manual/Helmets2023/hamilton.png" width="300px">
-          <p style="margin-left: 75px; color: white;"><b>Country:</b> United Kingdom</p>
-          <p style="margin-left: 75px; color: white;"><b>Race Number:</b> 44</p>
-          <p style="margin-left: 75px; color: white;"><b>Years Active:</b> 2007 - present</p>
-          
-        </div>
-      </div></a>
+                <a class="card" href="#!">
+                <div class="front" style="background-image: url(https://media.formula1.com/content/dam/fom-website/drivers/2023Drivers/hamilton.jpg.img.1920.medium.jpg/1677069594164.jpg)">
+                    
                 </div>
-                <div class="col">
-                    <div id="bio">
-
+                <div class="back">
+                    <div>
+                    <img src="https://media.formula1.com/content/dam/fom-website/manual/Helmets2023/hamilton.png" width="300px">
+                    <p style="margin-left: 75px; color: white;"><b>Country:</b> United Kingdom</p>
+                    <p style="margin-left: 75px; color: white;"><b>Race Number:</b> 44</p>
+                    <p style="margin-left: 75px; color: white;"><b>Years Active:</b> 2007 - present</p>
+                    
                     </div>
-                </div>
+                </div></a>
+            </div>
+            <div class="col">
+                <button id="request" class="btn btn-primary btn-lg center" style="background-color: #15151e; color: white;"> Click to learn more about Lewis Hamilton</button>
+                <div id="bio"></div>
             </div>
         </div>
-
+    </div>
+</div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
             (function() {
             'use strict';
             // desired selectors
+            const btn = document.getElementById('request');
             const bio = document.getElementById('bio');
 
             // request
@@ -84,15 +84,17 @@
                 }
                 }
             }
-            setInterval(myFunction, 3000);
 
-            function myFunction() {
-            request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json');
+            // click button for function
+            btn.addEventListener('click', function() {
+                console.log('button clicked');
+                
+                // request from data source
+                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json');
 
                 request.send();
-                
-                };
-            });
+                });
+            })();
         </script>
     </body>
 </html>
