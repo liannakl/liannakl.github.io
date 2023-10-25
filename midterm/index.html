@@ -74,12 +74,7 @@
           (function() {
             'use strict';
             var btn = document.getElementById('request');
-            var history = document.getElementById('history');
-
-            function htmlDecode(input) {
-            var doc = new DOMParser().parseFromString(input, "text/html");
-            return doc.documentElement.textContent;
-            }
+            var bio = document.getElementById('bio');
 
             var request = new XMLHttpRequest();
 
@@ -89,7 +84,7 @@
                 
                 if(request.status === 200) {
                 
-                    history.innerHTML = request.responseText;        
+                    bio.innerHTML = request.responseText;        
                 } else {
                     
                     history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
