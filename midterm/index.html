@@ -83,6 +83,7 @@
                 if(request.readyState === 4) {
                 
                 if(request.status === 200) {
+                    console.log(request.responseText);
                 
                     history.innerHTML = request.responseText;        
                 } else {
@@ -93,7 +94,7 @@
             }
 
             btn.addEventListener('click', function() {
-                console.log('button clicked')
+                console.log('button clicked');
                 
                 request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
 
