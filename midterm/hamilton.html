@@ -46,13 +46,51 @@
       </div></a>
                 </div>
                 <div class="col">
+                    <div id="bio">
 
+                    </div>
                 </div>
             </div>
         </div>
 
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
+        <script>
+            (function() {
+            'use strict';
+            // desired selectors
+            const history = document.getElementById('history');
+
+            // request
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function() {
+
+                // check if data is sent back
+                if(request.readyState === 4) {
+                
+                // check if data request is successful
+                if(request.status === 200) {
+
+                    //update html of div
+                    console.log(request.responseText);
+                    const jsonResponse = JSON.parse(request.responseText);
+                    const textContent = jsonResponse.query.pages[675561].extract;
+                    bio.innerHTML = textContent;        
+                } else {
+                    
+                    // display error message
+                    bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+                }
+                }
+            }
+                
+                // request from data source
+                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json');
+
+                request.send();
+                });
+        
         </script>
     </body>
 </html>
