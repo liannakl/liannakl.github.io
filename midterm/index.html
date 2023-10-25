@@ -85,7 +85,9 @@
                 if(request.status === 200) {
                     console.log(request.responseText);
                 
-                    history.innerHTML = request.responseText;        
+                    const jsonResponse = JSON.parse(request.responseText);
+                    const textContent = jsonResponse.query.pages[640098].extract;
+                    history.innerHTML = textContent;        
                 } else {
                     
                     history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
