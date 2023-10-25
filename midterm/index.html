@@ -74,7 +74,7 @@
           (function() {
             'use strict';
             var btn = document.getElementById('request');
-            var bio = document.getElementById('bio');
+            var history = document.getElementById('history');
 
             var request = new XMLHttpRequest();
 
@@ -84,17 +84,17 @@
                 
                 if(request.status === 200) {
                 
-                    bio.innerHTML = request.responseText;        
+                    history.innerHTML = request.responseText;        
                 } else {
                     
-                    bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+                    history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
                 }
                 }
             }
 
             btn.addEventListener('click', function() {
             
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
+                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
 
                 request.send();
                 });
