@@ -49,7 +49,7 @@
             <br>
             <br>
             <button id="request" class="center"> Click for a brief history on Formula 1</button>
-             <div id="history" class="center"></div>
+             <div id="bio"></div>
         </div>
 
         <br>
@@ -74,7 +74,7 @@
           (function() {
             'use strict';
             var btn = document.getElementById('request');
-            var history = document.getElementById('history');
+            var bio = document.getElementById('bio');
 
             var request = new XMLHttpRequest();
 
@@ -84,17 +84,17 @@
                 
                 if(request.status === 200) {
                 
-                    history.innerHTML = request.responseText;        
+                    bio.innerHTML = request.responseText;        
                 } else {
                     
-                    history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
+                    bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
                 }
                 }
             }
 
             btn.addEventListener('click', function() {
             
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
+                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
 
                 request.send();
                 });
