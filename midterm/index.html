@@ -73,31 +73,39 @@
         <script>
           (function() {
             'use strict';
+            // desired selectors
             var btn = document.getElementById('request');
             var history = document.getElementById('history');
 
+            // request
             var request = new XMLHttpRequest();
 
             request.onreadystatechange = function() {
 
+                // check if data is sent back
                 if(request.readyState === 4) {
                 
+                // check if data request is successful
                 if(request.status === 200) {
+
+                    //update html of div
                     console.log(request.responseText);
-                
                     const jsonResponse = JSON.parse(request.responseText);
                     const textContent = jsonResponse.query.pages[640098].extract;
                     history.innerHTML = textContent;        
                 } else {
                     
+                    // display error message
                     history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
                 }
                 }
             }
 
+            // click button for function
             btn.addEventListener('click', function() {
                 console.log('button clicked');
                 
+                // request from data source
                 request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
 
                 request.send();
