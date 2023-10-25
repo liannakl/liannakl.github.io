@@ -117,7 +117,6 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, #1a9be6, #1a57e6);
     opacity: 0.25;
     z-index: -1;
   }
@@ -129,7 +128,7 @@
   }
   
   .back {
-    background: #fff;
+    background: url(img/bg.png);
     transform: rotateY(-180deg);
     padding: 0 2em;
   }
