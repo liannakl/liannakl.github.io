@@ -84,13 +84,15 @@
                 }
                 }
             }
-                
-                // request from data source
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json');
+            setInterval(myFunction, 3000);
+
+            function myFunction() {
+            request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json');
 
                 request.send();
-                });
-        
+                
+                };
+            });
         </script>
     </body>
 </html>
