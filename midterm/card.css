@@ -63,8 +63,8 @@
   .card {
     color: inherit;
     cursor: pointer;
-    width: calc(60% - 2rem);
-    min-width: calc(60% - 2rem);
+    width: calc(60%);
+    min-width: calc(60%);
     height: 550px;
     min-height: 550px;
     perspective: 1000px;
