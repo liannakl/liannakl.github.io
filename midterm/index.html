@@ -76,11 +76,6 @@
             var btn = document.getElementById('request');
             var history = document.getElementById('history');
 
-            function htmlDecode(input) {
-    var doc = new DOMParser().parseFromString(input, "text/html");
-    return doc.documentElement.textContent;
-  }
-
             var request = new XMLHttpRequest();
 
             request.onreadystatechange = function() {
