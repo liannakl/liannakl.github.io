@@ -1,48 +1,119 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Formula One Wikipedia Article</title>
-</head>
-<body>
-    <h1>Formula One Wikipedia Article</h1>
-    <button onclick="getFormulaOneArticle()">Get Formula One Article</button>
-    <div id="article">
-        <p id="first-paragraph"></p>
-    </div>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <script>
-        function getFormulaOneArticle() {
-            // Replace 'en.wikipedia.org' with the relevant Wikipedia domain if needed.
-            const apiUrl = 'https://en.wikipedia.org/w/api.php';
-            const pageTitle = 'History_of_Formula_One';
-            const params = {
-                action: 'query',
-                prop: 'extracts',
-                format: 'json',
-                exintro: true,
-                titles: pageTitle,
-            };
+        <style>
+            body {
+                margin-top: 50px;
+            }
+            .center {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            button.btn {
+                background: #e20000;
+            }
+        </style>
+        
+        <title>F1's Greatest Drivers</title>
+    </head>
+    <body>
+        <div class="container text-center">
+            <div class="row">
+                <div class="col-12">
+                    <img src="img/title.png" width="1000" class="center">
+                </div>
+                <div class="col">
+            </div>
+                </div>
+            </div>
+        </div>
 
-            const queryString = Object.keys(params)
-                .map(key => key + '=' + encodeURIComponent(params[key]))
-                .join('&');
+        <br>
 
-            const url = `${apiUrl}?${queryString}`;
+        <div>
+            <a href="https://www.formula1.com/">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/33/F1.svg/1024px-F1.svg.png" class="center" width="400px">
+            </a>
 
-            // Make an AJAX request to retrieve the Wikipedia article.
-            const xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4 && xhr.status === 200) {
-                    const response = JSON.parse(xhr.responseText);
-                    const pageId = Object.keys(response.query.pages)[0];
-                    const firstParagraph = response.query.pages[pageId].extract;
-                    const firstParagraphElement = document.getElementById('first-paragraph');
-                    firstParagraphElement.innerHTML = firstParagraph;
+            <br>
+            <br>
+            <div class="container text-container">
+                <div class="row">
+                    <div class="col-12">
+                        <button id="request" class="btn btn-primary btn-lg center" style="background-color: #15151e; color: white;"> Click for a brief history on Formula 1</button>
+                        <br>
+                        <div id="history" class="center" style="font-size: large;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <br>
+        <br>
+
+        <div class="dropdown-center center">
+            <button class="btn btn-secondary dropdown-toggle center" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Select a Driver
+        </button>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="hamilton.html">Lewis Hamilton</a></li>
+                <li><a class="dropdown-item" href="lauda.html">Niki Lauda</a></li>
+                <li><a class="dropdown-item" href="senna.html">Ayrton Senna</a></li>
+                <li><a class="dropdown-item" href="schumacher.html">Michael Schumacher</a></li>
+                <li><a class="dropdown-item" href="vettel.html">Sebastian Vettel</a></li>
+                <li><a class="dropdown-item" href="verstappen.html">Max Verstappen</a></li>
+            </ul>
+        </div>
+
+            
+        <script>
+          (function() {
+            'use strict';
+            // desired selectors
+            const btn = document.getElementById('request');
+            const history = document.getElementById('history');
+
+            // request
+            const request = new XMLHttpRequest();
+
+            request.onreadystatechange = function() {
+
+                // check if data is sent back
+                if(request.readyState === 4) {
+                
+                // check if data request is successful
+                if(request.status === 200) {
+
+                    //update html of div
+                    console.log(request.responseText);
+                    const jsonResponse = JSON.parse(request.responseText);
+                    const textContent = jsonResponse.query.pages[640098].extract;
+                    history.innerHTML = textContent;        
+                } else {
+                    
+                    // display error message
+                    history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
                 }
-            };
-            xhr.send();
-        }
-    </script>
-</body>
+                }
+            }
+
+            // click button for function
+            btn.addEventListener('click', function() {
+                console.log('button clicked');
+                
+                // request from data source
+                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
+
+                request.send();
+                });
+            })();  
+
+            
+        </script>
+    </body>
 </html>
