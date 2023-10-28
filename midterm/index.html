@@ -80,7 +80,7 @@
             const btn = document.getElementById('request');
 
             function fetchWikipediaData() {
-                const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json'
+                const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json';
 
                 // Use the fetch API to make the request
                 fetch(apiUrl)
@@ -101,7 +101,7 @@
                     });
         }
             // Call the fetchWikipediaData function when the page loads
-            btn.addEventListener('click', fetchWikipediaData)
+            btn.addEventListener('click', fetchWikipediaData);
           });  
         </script>
     </body>
