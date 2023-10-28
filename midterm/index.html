@@ -76,46 +76,31 @@
         <script>
           (function() {
             'use strict';
-            // desired selectors
-            const btn = document.getElementById('request');
-            const history = document.getElementById('history');
+            
+            const bioBtn = document.getElementById('bio tag button id');
+            const statsBtn = document.getElementById('stats tag button id');
 
-            // request
-            const request = new XMLHttpRequest();
-
-            request.onreadystatechange = function() {
-
-                // check if data is sent back
-                if(request.readyState === 4) {
-                
-                // check if data request is successful
-                if(request.status === 200) {
-
-                    //update html of div
-                    console.log(request.responseText);
-                    const jsonResponse = JSON.parse(request.responseText);
-                    const textContent = jsonResponse.query.pages[640098].extract;
-                    history.innerHTML = textContent;        
-                } else {
-                    
-                    // display error message
-                    history.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
-                }
-                }
+            function fetchBio() {
+                const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json'
             }
 
-            // click button for function
-            btn.addEventListener('click', function() {
-                console.log('button clicked');
-                
-                // request from data source
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=History_of_Formula_One&format=json');
+            //use the fetch API to make the request
+            fetch (apiURL)
+                .then(response => response.json())
+                .then(data => {
+                    //extract the page content from the API response
+                    const pages = data.query.pages;
+                    const pageId = Object.keys(pages)[0];
+                    const content = pages[padeId].extract;
 
-                request.send();
+                    //display the content on the page 
+                    const bio = document.getElementById('bio');
+                    bio.innerHTML = content;
+                })
+                .catch(error => {
+                    console.error("Error fetching Wikipedia data", error);
                 });
-            })();  
-
-            
+            });  
         </script>
     </body>
 </html>
