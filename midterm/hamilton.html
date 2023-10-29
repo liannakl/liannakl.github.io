@@ -90,7 +90,7 @@
         <div class="col">
           <br>
           <br>
-          <h3>1985 Season Statistics</h3>
+          <h3>2023 Season Statistics</h3>
           <div id="stats"></div>
         </div>
       </div>
@@ -157,6 +157,7 @@
             const headerRow = raceTable.insertRow();
             const headers = [
               "Race Name",
+              "Circuit",
               "Date",
               "Start Position",
               "Final Position",
@@ -174,6 +175,7 @@
 
             raceResults.forEach((race) => {
               const raceName = race.raceName;
+              const circuitName = race.Circuit.circuitName;
               const raceDate = race.date;
 
               const results = race.Results;
@@ -181,6 +183,7 @@
                 const row = raceTable.insertRow();
                 const columns = [
                   raceName,
+                  circuitName,
                   raceDate,
                   result.grid,
                   result.position,
