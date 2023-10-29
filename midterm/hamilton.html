@@ -95,24 +95,20 @@
             }
 
             function fetchStats () {
-                const apiUrl = 'https://ergast.com/api/f1/2023/drivers/hamilton/results.json';
+                const apiUrl = 'https://ergast.com/api/f1/2023/drivers/hamilton/results';
 
                 //use the fetch API to make the request
                 fetch(apiUrl)
-                    .then(response => response.json())
+                    .then(response => response.text())
                     .then(data => {
-                        // extract the page content from the API resonse
-                        const pages = data.query.pages;
-                        const pageId = Object.keys(pages)[0];
-                        const content = pages[pageId].extract;
-
-                        //display the content on the page
-                        const stats = document.getElementById('stats');
-                        stats.innerHTML = content;
-                    })
-                    .catch(error => {
-                        console.error('Error fetching ErgastF1 data:', error);
-                    });
+                    // You can use the data as text or parse it into a structured format
+                    // depending on your needs
+                    const stats = document.getElementById('stats');
+                    stats.innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error fetching ErgastF1 data:', error);
+                });
             }
 
             bioBtn.addEventListener('click', fetchBio);
