@@ -62,7 +62,7 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <div id="stats"></div>
+                    <div id="stats-table" class="table"></div>
                 </div>
             </div>
         </div>
@@ -101,15 +101,48 @@
                 fetch(apiUrl)
                     .then(response => response.text())
                     .then(data => {
-                    // You can use the data as text or parse it into a structured format
-                    // depending on your needs
-                    const stats = document.getElementById('stats');
-                    stats.innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error fetching ErgastF1 data:', error);
-                });
+                    
+                        // extract the relevant data from the response
+                        const raceresults = data.MRData.RaceTable.Races;
+
+                        //create a table element
+                        const table = document.createElement('table');
+                        table.className = 'table'
+
+                        // create table header
+                        const thead = table.createTHead();
+                        const headerRow = thead.insertRow();
+                        const headers = ['Race', 'Round', 'Circuit', 'Date', 'Time', 'Position', 'Points'];
+
+                        headers.forEach(headerText => {
+                            const th = document.createElement('th');
+                            th.innerText = headerText;
+                            headerRow.appendChild(th);
+                        });
+
+                        // create table rows with data
+                        const tbody = table.createTBody();
+                        raceResults.forEach(result => {
+                            const row = tbody.insertRow();
+                            row.insertCell().innerText = result.raceName;
+                            row.insertCell().innerText = result.round;
+                            row.insertCell().innerText = result.Circuit.circuitName;
+                            row.insertCell().innerText = result.date;
+                            row.insertCell().innerText = result.time || 'N/A';
+                            row.insertCell().innerText = result.Results[0].position || 'N/A';
+                            row.insertCell().innerText = result.Results[0].points || 'N/A';
+                        });
+
+                        // append the table to the 'stats-table' div
+                        const statsTable = getElementById('stats-table');
+                        statsTable.appendChild(table);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching ErgastF1 data:', error)
+                    });
             }
+
+            fetchStats();
 
             bioBtn.addEventListener('click', fetchBio);
             window.addEventListener('load', fetchStats);
