@@ -60,51 +60,129 @@
                     <div id="bio"></div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col">
+                  <br>
+                  <br>
+                  <h3>2023 Season Statistics</h3>
+                  <div id="stats"></div>
+                </div>
+              </div>
         </div>
 
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
-            (function() {
-            'use strict';
-            // desired selectors
-            const btn = document.getElementById('request');
-            const bio = document.getElementById('bio');
+            const bioBtn = document.getElementById("request");
+      const statsBtn = document.getElementById("request");
 
-            // request
-            const request = new XMLHttpRequest();
+      function fetchBio() {
+        const apiUrl =
+          "https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Niki_Lauda&format=json";
 
-            request.onreadystatechange = function() {
+        // use the fetch API to make the request
+        fetch(apiUrl)
+          .then((response) => response.json())
+          .then((data) => {
+            //extract the page content from the API response
+            const pages = data.query.pages;
+            const pageId = Object.keys(pages)[0];
+            const content = pages[pageId].extract;
 
-                // check if data is sent back
-                if(request.readyState === 4) {
-                
-                // check if data request is successful
-                if(request.status === 200) {
+            // display the content on the page
+            const bio = document.getElementById("bio");
+            bio.innerHTML = content;
+          })
+          .catch((error) => {
+            console.error("Error fetching Wikipedia data:", error);
+          });
+      }
 
-                    //update html of div
-                    console.log(request.responseText);
-                    const jsonResponse = JSON.parse(request.responseText);
-                    const textContent = jsonResponse.query.pages[40486].extract;
-                    bio.innerHTML = textContent;        
-                } else {
-                    
-                    // display error message
-                    bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
-                }
-                }
+      function fetchStats() {
+        const apiUrl =
+          "https://ergast.com/api/f1/1985/drivers/lauda/results.json";
+
+        fetch(apiUrl)
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error("Network response was not ok");
             }
+            return response.json();
+          })
+          .then((data) => {
+            // Assuming the data is structured as an object with a "MRData" property
+            const raceResults = data.MRData.RaceTable.Races;
 
-            // click button for function
-            btn.addEventListener('click', function() {
-                console.log('button clicked');
-                
-                // request from data source
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Niki_Lauda&format=json');
+            if (raceResults.length === 0) {
+              console.log("No race results found for Lauda in 1985.");
+              return;
+            } // Create a container div to display the data
 
-                request.send();
+            const container = document.createElement("div");
+            const raceTable = document.createElement("table"); // Create the table header
+
+            // add the centered-table class to the table
+            raceTable.classList.add("table", "table-sm", "table-bordered");
+
+            const headerRow = raceTable.insertRow();
+            const headers = [
+              "Race Name",
+              "Date",
+              "Start Position",
+              "Final Position",
+              "Laps",
+              "Time",
+              "Status",
+              "Points",
+            ];
+
+            headers.forEach((headerText) => {
+              const th = document.createElement("th");
+              th.innerText = headerText;
+              headerRow.appendChild(th);
+            });
+
+            raceResults.forEach((race) => {
+              const raceName = race.raceName;
+              const raceDate = race.date;
+
+              const results = race.Results;
+              results.forEach((result) => {
+                const row = raceTable.insertRow();
+                const columns = [
+                  raceName,
+                  raceDate,
+                  result.grid,
+                  result.position,
+                  result.laps,
+                  result.Time ? result.Time.time : "",
+                  result.status,
+                  result.points,
+                ];
+
+                columns.forEach((columnText) => {
+                  const cell = row.insertCell();
+                  cell.innerText = columnText;
                 });
-            })();
+              });
+            });
+
+            container.appendChild(raceTable); // Append the data to an existing HTML element or the body
+
+            const statsContainer = document.getElementById("stats-container");
+            if (statsContainer) {
+              statsContainer.appendChild(container);
+            } else {
+              document.body.appendChild(container);
+            }
+          })
+          .catch((error) => {
+            console.error("Error fetching data:", error);
+          });
+      }
+
+      bioBtn.addEventListener("click", fetchBio);
+      window.addEventListener("load", fetchStats);
         </script>
     </body>
 </html>
