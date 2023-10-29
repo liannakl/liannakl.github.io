@@ -111,25 +111,29 @@
                         const table = document.createElement('table');
                         table.className = 'table'; // Add Bootstrap table class for styling
 
-                        // Initialize a flag to identify when to start a new row
-                    let newRace = true;
+                        // Create a table header
+                        const thead = table.createTHead();
+                        const headerRow = thead.insertRow();
+                        const headers = ['Race', 'Round', 'Circuit', 'Date', 'Time', 'Position', 'Points'];
 
-                    lines.forEach(line => {
-                        // Detect race section headers
-                        if (line.match(/\d{4} .+ Grand Prix/)) {
-                            newRace = true;
-                        } else if (!newRace) {
-                            // Split the line by whitespace and create a row
-                            const columns = line.trim().split(/\s+/);
-                            if (columns.length === 9) {
-                                const row = table.insertRow();
+                        headers.forEach(headerText => {
+                            const th = document.createElement('th');
+                            th.innerText = headerText;
+                            headerRow.appendChild(th);
+                        });
+
+                        // Create table rows with data
+                        const tbody = table.createTBody();
+                        lines.forEach(line => {
+                            const columns = line.split(',');
+                            if (columns.length === 7) { // Assuming each row has 7 columns
+                                const row = tbody.insertRow();
                                 columns.forEach(columnText => {
                                     const cell = row.insertCell();
                                     cell.innerText = columnText;
                                 });
                             }
-                        }
-                    });
+                        });
 
                         // Append the table to the 'stats-table' div
                         const statsTable = document.getElementById('stats-table');
