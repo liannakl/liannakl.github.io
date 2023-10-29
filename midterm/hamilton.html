@@ -57,7 +57,7 @@
                 <div class="col">
                     <br>
                     <button id="request" class="btn btn-primary btn-lg center" style="background-color: #15151e; color: white;"> Click to learn more about Lewis Hamilton</button>
-                    <div id="bio"></div>
+                    <div id="bio" style="text-align: left;"></div>
                 </div>
             </div>
             <div class="row">
@@ -95,7 +95,7 @@
             }
 
             function fetchStats () {
-                const apiUrl = 'http://ergast.com/api/f1/2023/drivers/hamilton/results';
+                const apiUrl = 'https://ergast.com/api/f1/2023/drivers/hamilton/results';
 
                 //use the fetch API to make the request
                 fetch(apiUrl)
