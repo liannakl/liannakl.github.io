@@ -98,11 +98,11 @@
             }
 
             function fetchStats () {
-                const apiUrl = 'https://ergast.com/api/f1/2023/drivers/hamilton/results.json';
+                const apiUrl = 'https://ergast.com/api/f1/2023/drivers/hamilton/results';
 
                 //use the fetch API to make the request
                 fetch(apiUrl)
-                    .then(response => response.json())
+                    .then(response => response.text())
                     .then(data => {
                         // extract the page content from the API resonse
                         const pages = data.query.pages;
