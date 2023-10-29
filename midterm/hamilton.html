@@ -23,6 +23,8 @@
         font-size: large;
         text-align: left;
       }
+      
+
     </style>
 
     <title>F1's Greatest Drivers</title>
@@ -89,7 +91,7 @@
           <br />
           <br />
           <h3>2023 Season Statistics</h3>
-          <div id="stats" style="text-align: center;"></div>
+          <div id="stats"></div>
         </div>
       </div>
     </div>
@@ -149,15 +151,14 @@
             const container = document.createElement("div");
             const raceTable = document.createElement("table"); // Create the table header
 
+            // add the centered-table class to the table
+            raceTable.classList.add("table");
+
             const headerRow = raceTable.insertRow();
             const headers = [
               "Race Name",
               "Date",
-              "Time",
               "Position",
-              "Number",
-              "Driver",
-              "Constructor",
               "Laps",
               "Grid",
               "Time",
@@ -174,7 +175,6 @@
             raceResults.forEach((race) => {
               const raceName = race.raceName;
               const raceDate = race.date;
-              const raceTime = race.time;
 
               const results = race.Results;
               results.forEach((result) => {
@@ -182,11 +182,7 @@
                 const columns = [
                   raceName,
                   raceDate,
-                  raceTime,
                   result.position,
-                  result.number,
-                  result.Driver.familyName,
-                  result.Constructor.name,
                   result.laps,
                   result.grid,
                   result.Time ? result.Time.time : "",
