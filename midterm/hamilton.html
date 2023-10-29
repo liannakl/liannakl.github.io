@@ -105,6 +105,11 @@
                         // extract the relevant data from the response
                         const raceresults = data.MRData.RaceTable.Races;
 
+                        if (raceResults.length === 0) {
+                        console.error('No race results found.');
+                        return;
+                        }
+
                         //create a table element
                         const table = document.createElement('table');
                         table.className = 'table'
