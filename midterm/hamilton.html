@@ -65,46 +65,53 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
         <script>
-            (function() {
-            'use strict';
-            // desired selectors
-            const btn = document.getElementById('request');
-            const bio = document.getElementById('bio');
+            const bioBtn = document.getElementById('bio tag button id');
+            const statsBtn = document.getElementById('stats tag button id');
 
-            // request
-            const request = new XMLHttpRequest();
+            function fetchBio() {
+                const apiUrl = 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json';
 
-            request.onreadystatechange = function() {
+                // use the fetch API to make the request
+                fetch(apiUrl)
+                    .then(response=> response.json ())
+                    .then(data => {
+                        //extract the page content from the API response
+                        const pages = data.query.pages;
+                        const pageId = Object.keys(pages)[0];
+                        const content = pages[pageId].extract;
 
-                // check if data is sent back
-                if(request.readyState === 4) {
-                
-                // check if data request is successful
-                if(request.status === 200) {
-
-                    //update html of div
-                    console.log(request.responseText);
-                    const jsonResponse = JSON.parse(request.responseText);
-                    const textContent = jsonResponse.query.pages[675561].extract;
-                    bio.innerHTML = textContent;        
-                } else {
-                    
-                    // display error message
-                    bio.innerHTML = 'An error occurred during your request: ' +  request.status + ' ' + request.statusText;
-                }
-                }
+                        // display th e content on the page
+                        const bio = document.getElementById('bio');
+                        bio.innerHTML = content;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching Wikipedia data:', error);
+                    });
             }
 
-            // click button for function
-            btn.addEventListener('click', function() {
-                console.log('button clicked');
-                
-                // request from data source
-                request.open('Get', 'https://en.wikipedia.org/w/api.php?action=query&origin=*&prop=extracts&exintro&titles=Lewis_Hamilton&format=json');
+            function fetchStats () {
+                const apiUrl = 'http://ergast.com/api/f1/2023/drivers/hamilton/results';
 
-                request.send();
-                });
-            })();
+                //use the fetch API to make the request
+                fetch(apiUrl)
+                    .then(response => response.json())
+                    .then(data => {
+                        // extract the page content from the API resonse
+                        const pages = data.query.pages;
+                        const pageId = Object.keys(pages)[0];
+                        const content = pages[pageId].extract;
+
+                        //display the content on the page
+                        const stats = document.getElementById('stats');
+                        stats.innerHTML = content;
+                    })
+                    .catch(error => {
+                        console.error('Error fetching ErgastF1 data:', error);
+                    });
+            }
+
+            bioBtn.addEventListener('click', fetchBio);
+            window.addEventListener('load', fetchStats);
         </script>
     </body>
 </html>
