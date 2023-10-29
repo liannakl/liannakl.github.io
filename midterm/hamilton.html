@@ -101,20 +101,14 @@
                 fetch(apiUrl)
                     .then(response => response.text())
                     .then(data => {
-                    
-                        // extract the relevant data from the response
-                        const raceresults = data.MRData.RaceTable.Races;
+                        // Split the text data into an array of lines
+                        const lines = data.split('\n');
 
-                        if (raceResults.length === 0) {
-                        console.error('No race results found.');
-                        return;
-                        }
-
-                        //create a table element
+                        // Create a table element
                         const table = document.createElement('table');
-                        table.className = 'table'
+                        table.className = 'table'; // Add Bootstrap table class for styling
 
-                        // create table header
+                        // Create a table header
                         const thead = table.createTHead();
                         const headerRow = thead.insertRow();
                         const headers = ['Race', 'Round', 'Circuit', 'Date', 'Time', 'Position', 'Points'];
@@ -125,25 +119,25 @@
                             headerRow.appendChild(th);
                         });
 
-                        // create table rows with data
+                        // Create table rows with data
                         const tbody = table.createTBody();
-                        raceResults.forEach(result => {
-                            const row = tbody.insertRow();
-                            row.insertCell().innerText = result.raceName;
-                            row.insertCell().innerText = result.round;
-                            row.insertCell().innerText = result.Circuit.circuitName;
-                            row.insertCell().innerText = result.date;
-                            row.insertCell().innerText = result.time || 'N/A';
-                            row.insertCell().innerText = result.Results[0].position || 'N/A';
-                            row.insertCell().innerText = result.Results[0].points || 'N/A';
+                        lines.forEach(line => {
+                            const columns = line.split(',');
+                            if (columns.length === 7) { // Assuming each row has 7 columns
+                                const row = tbody.insertRow();
+                                columns.forEach(columnText => {
+                                    const cell = row.insertCell();
+                                    cell.innerText = columnText;
+                                });
+                            }
                         });
 
-                        // append the table to the 'stats-table' div
-                        const statsTable = getElementById('stats-table');
+                        // Append the table to the 'stats-table' div
+                        const statsTable = document.getElementById('stats-table');
                         statsTable.appendChild(table);
                     })
                     .catch(error => {
-                        console.error('Error fetching ErgastF1 data:', error)
+                        console.error('Error fetching ErgastF1 data:', error);
                     });
             }
 
